@@ -43,7 +43,7 @@ class BottomNavBar extends ConsumerWidget {
             label: tr('bottom_nav_first'),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(FluentIcons.info_24_regular),
+            icon: const Icon(FluentIcons.settings_24_regular),
             label: tr('bottom_nav_second'),
           ),
         ],

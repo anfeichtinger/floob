@@ -1,7 +1,7 @@
 {
-  "app_name": "Flutter Production Boilerplate",
+  "app_name": "floob",
   "bottom_nav_first": "Home",
-  "bottom_nav_second": "Details",
+  "bottom_nav_second": "Settings",
   "localization_title": "Localization",
   "localization_content": "Simplified translations with the Easy Translations package.",
   "linting_title": "Linting",

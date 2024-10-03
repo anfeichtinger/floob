@@ -27,6 +27,8 @@ linter:
     
 # Uncomment the analyzer block to enable stricter type checks
 analyzer:
+  plugins:
+    - custom_lint
   language:
     strict-casts: true
     strict-inference: true

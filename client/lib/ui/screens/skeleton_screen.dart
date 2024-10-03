@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate_riverpod/ui/screens/home_screen.dart';
+import 'package:flutter_production_boilerplate_riverpod/ui/screens/settings_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../states/widgets/bottom_nav_bar/bottom_nav_bar_state.dart';
 import '../widgets/app_bar_gone.dart';
 import '../widgets/bottom_nav_bar.dart';
-import 'first_screen.dart';
-import 'second_screen.dart';
 
 class SkeletonScreen extends ConsumerWidget {
   const SkeletonScreen({super.key});
@@ -13,9 +13,9 @@ class SkeletonScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final int? navIndex = ref.watch(bottomNavProvider) as int?;
-    const List<Widget> pageNavigation = <Widget>[
-      FirstScreen(),
-      SecondScreen(),
+    List<Widget> pageNavigation = <Widget>[
+      const HomeScreen(),
+      const SettingsScreen(),
     ];
 
     return Scaffold(

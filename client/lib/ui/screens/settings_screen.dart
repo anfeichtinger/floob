@@ -3,48 +3,12 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../widgets/first_screen/info_card.dart';
-import '../widgets/first_screen/theme_card.dart';
+import '../widgets/settings_screen/theme_card.dart';
 import '../widgets/header.dart';
 
-class FirstScreen extends ConsumerWidget {
-  const FirstScreen({super.key});
-
-  static const List<bool> infoCardPattern = <bool>[true, false, false, true];
-  static const List<Map<String, dynamic>> infoCards = <Map<String, dynamic>>[
-    <String, dynamic>{
-      'title': 'localization_title',
-      'content': 'localization_content',
-      'icon': FluentIcons.local_language_24_regular,
-    },
-    <String, dynamic>{
-      'title': 'linting_title',
-      'content': 'linting_content',
-      'icon': FluentIcons.code_24_regular,
-    },
-    <String, dynamic>{
-      'title': 'storage_title',
-      'content': 'storage_content',
-      'icon': FluentIcons.folder_open_24_regular,
-    },
-    <String, dynamic>{
-      'title': 'dark_mode_title',
-      'content': 'dark_mode_content',
-      'icon': FluentIcons.weather_moon_24_regular,
-    },
-    <String, dynamic>{
-      'title': 'state_title',
-      'content': 'state_content',
-      'icon': FluentIcons.leaf_three_24_regular,
-    },
-    <String, dynamic>{
-      'title': 'display_title',
-      'content': 'display_content',
-      'icon': FluentIcons.top_speed_24_regular,
-    },
-  ];
+class SettingsScreen extends ConsumerWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -127,49 +91,9 @@ class FirstScreen extends ConsumerWidget {
               ),
             ],
           ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-            child: Divider(
-              color: Theme.of(context).dividerColor,
-            ),
-          ),
-
-          /// If no complex grids are required remove the flutter_staggered_grid_view package
-          MasonryGridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: infoCards.length,
-            padding: const EdgeInsets.all(0),
-
-            /// Example: Adjust based on screen size
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: MediaQuery.of(context).size.width > 768 ? 3 : 2,
-            ),
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            itemBuilder: (BuildContext context, int index) =>
-
-                /// Example: it is good practice to put widgets in separate files.
-                /// This way the screen files won't become too large and
-                /// the code becomes more clear.
-                InfoCard(
-                    title: infoCards[index]['title'] as String,
-                    content: infoCards[index]['content'] as String,
-                    icon: infoCards[index]['icon'] as IconData,
-                    isPrimaryColor: MediaQuery.of(context).size.width > 768
-                        ? index.isEven
-                        : infoCardShouldBePrimary(index)),
-          ),
-
           const SizedBox(height: 36),
         ],
       ),
     );
-  }
-
-  /// This will determine which info cards should render in primary color based on the given pattern.
-  bool infoCardShouldBePrimary(int index) {
-    return infoCardPattern[index % infoCardPattern.length];
   }
 }

@@ -40,6 +40,9 @@ dependencies:
   url_launcher: ^6.3.0 # Can be removed if not needed
   fluentui_system_icons: ^1.1.255 # Can be removed if not needed
   flutter_staggered_grid_view: ^0.7.0 # Can be removed if not needed
+  json_annotation: ^4.9.0
+  http: ^1.2.2
+  riverpod_annotation: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +54,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
+  riverpod_generator: ^2.4.3
+  custom_lint: ^0.6.7
+  riverpod_lint: ^2.3.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
