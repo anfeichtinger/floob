@@ -29,7 +29,7 @@ class UserController extends BaseController {
 
   Future<User?> getUser(String id) async {
     // Send the request
-    final Response response = await FloobApi.get('/user/$id');
+    final Response response = await FloobApi.get('/users/$id');
 
     // Abort if the status code is not 200
     if (response.statusCode != 200) {
