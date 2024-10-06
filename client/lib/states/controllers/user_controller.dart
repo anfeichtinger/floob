@@ -37,6 +37,6 @@ class UserController extends BaseController {
     }
 
     // Parse and return the user.
-    return FloobApi.parseOne<User>(response, User.fromJson);
+    return FloobApi.parseOne(response, User.fromJson);
   }
 }
