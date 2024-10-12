@@ -10,8 +10,12 @@ class Location extends Model
 {
     use HasFactory;
 
+    #region Relations
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
+
+    #endregion Relations
 }

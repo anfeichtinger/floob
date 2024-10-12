@@ -10,6 +10,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    #region Relations
+
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
@@ -19,4 +21,6 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    #endregion Relations
 }

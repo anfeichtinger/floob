@@ -32,8 +32,12 @@ class Badge extends Model
         ];
     }
 
+    #region Relations
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
+
+    #endregion Relations
 }

@@ -10,6 +10,8 @@ class AccessibilityData extends Model
 {
     use HasFactory;
 
+    #region Relations
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -19,4 +21,6 @@ class AccessibilityData extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    #endregion Relations
 }

@@ -10,22 +10,15 @@ class Address extends Model
 {
     use HasFactory;
 
-    /*
-    |------------------------------------------------------------------------------
-    | Relations
-    |------------------------------------------------------------------------------
-    */
+    #region Relations
 
     public function addressable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    /*
-    |------------------------------------------------------------------------------
-    | Helpers
-    |------------------------------------------------------------------------------
-    */
+    #endregion Relations
+    #region Helpers
 
     /**
      * Returns the address string based on the given format.
@@ -63,4 +56,6 @@ class Address extends Model
 
         return $result;
     }
+
+    #endregion Helpers
 }

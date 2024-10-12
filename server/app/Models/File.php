@@ -10,14 +10,12 @@ class File extends Model
 {
     use HasFactory;
 
-    /*
-    |------------------------------------------------------------------------------
-    | Relations
-    |------------------------------------------------------------------------------
-    */
+    #region Relations
 
     public function fileable(): MorphTo
     {
         return $this->morphTo();
     }
+
+    #endregion Relations
 }
