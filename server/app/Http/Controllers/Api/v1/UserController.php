@@ -9,8 +9,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -84,7 +82,7 @@ class UserController extends Controller
     /**
      * Get all: apply filters, sorts etc from request.
      */
-    public function getUsers(Request $request): AnonymousResourceCollection
+    public function getUsers(Request $request): mixed
     {
         $users = User::forRequest($request)->get();
 
@@ -94,7 +92,7 @@ class UserController extends Controller
     /**
      * Paginate: apply filters, sorts etc from request.
      */
-    public function paginateUsers(Request $request): AnonymousResourceCollection
+    public function paginateUsers(Request $request): mixed
     {
         $users = User::forRequest($request)->paginate(
             perPage: $request?->perPage ?? 10,
@@ -109,12 +107,12 @@ class UserController extends Controller
     /**
      * Get by id.
      */
-    public function getUser(null|string|int $id = null): JsonResource
+    public function getUser(null|string|int $id = null): mixed
     {
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json("User with id $id not found.", 404);
+            return response()->json(['message' => "User with id $id not found."], Response::HTTP_NOT_FOUND);
         }
 
         return UserResource::make($user);

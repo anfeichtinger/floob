@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\LocationController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,11 @@ Route::controller(UserController::class)->prefix('/users')->group(function () {
     Route::get('/{id}', 'getUser');
 });
 #endregion Users
+
+#region Locations
+Route::controller(LocationController::class)->prefix('/locations')->group(function () {
+    Route::get('/', 'getLocations');
+    Route::get('/paginate', 'paginateLocations');
+    Route::get('/{id}', 'getLocation');
+});
+#endregion Locations
