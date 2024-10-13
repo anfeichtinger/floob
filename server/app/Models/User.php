@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\IsApiModel;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, IsApiModel, Notifiable;
+    use HasFactory, IsApiModel, MustVerifyEmail, Notifiable;
 
     /**
      * The attributes that should be mass assignable.

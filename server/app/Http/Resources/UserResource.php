@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
+            'remember_token' => $this->when($request->remember, $this->remember_token),
             'badges' => BadgeResource::collection($this->whenLoaded('badges')),
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
         ];

@@ -9,7 +9,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
-        "robsontenorio/mary": "^1.40"
+        "robsontenorio/mary": "^1.40",
+        "spatie/laravel-data": "^4.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
