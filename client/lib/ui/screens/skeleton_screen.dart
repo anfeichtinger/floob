@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../states/widgets/bottom_nav_bar/bottom_nav_bar_state.dart';
 import '../widgets/app_bar_gone.dart';
-import '../widgets/bottom_nav_bar.dart';
+import '../widgets/search_bottom_sheet.dart';
 
 class SkeletonScreen extends ConsumerWidget {
   const SkeletonScreen({super.key});
@@ -29,7 +29,7 @@ class SkeletonScreen extends ConsumerWidget {
         child: pageNavigation.elementAt(navIndex ?? 0),
       ),
 
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: const SearchBottomSheet(),
       backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
