@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate_riverpod/data/models/location.dart';
+import 'package:flutter_production_boilerplate_riverpod/states/controllers/location_controller.dart';
 import 'package:flutter_production_boilerplate_riverpod/states/controllers/user_controller.dart';
 import 'package:flutter_production_boilerplate_riverpod/data/models/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,6 +54,52 @@ class HomeScreen extends ConsumerWidget {
                   return Text('${snapshot.error}');
                 } else if (!snapshot.hasData) {
                   return const Text('No users found');
+                }
+
+                // Show the data
+                return Text(jsonEncode(snapshot.data));
+              },
+            ),
+
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: Divider(),
+            ),
+
+            // Getting all locations from api on page load
+            const Text('Get all locations'),
+            FutureBuilder<List<Location>>(
+              future: ref.watch(locationControllerProvider).getLocations(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Location>> snapshot) {
+                print('Rendering future builder');
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Text('No locations found');
+                }
+
+                // Show the data
+                return Text(jsonEncode(snapshot.data));
+              },
+            ),
+
+            const SizedBox(height: 16),
+
+            // Getting location with id 1 from api on page load
+            const Text('Get locations with id 1'),
+            FutureBuilder<Location?>(
+              future: ref.watch(locationControllerProvider).getLocation('1'),
+              builder:
+                  (BuildContext context, AsyncSnapshot<Location?> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                } else if (!snapshot.hasData) {
+                  return const Text('No locations found');
                 }
 
                 // Show the data

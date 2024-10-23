@@ -1,25 +1,98 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+
+// Todo: implement a caching system to prevent the same request from being
+// executed multiple times.
 
 class FloobApi {
   // |===========|
   // |  Actions  |
   // |===========|
 
-  /// Sends a get request to the given path with the given query parameters.
-  static Future<http.Response> get(String path, {Map<String, dynamic>? query}) {
+  /// Sends a GET request to the given path with the given query parameters and headers.
+  static Future<http.Response> get(
+    String path, {
+    Map<String, dynamic>? query,
+    Map<String, String>? headers,
+  }) {
+    Uri uri = FloobApi._parseUri(path: path, query: query);
+    FloobApi._log('GET', uri: uri, body: null, headers: headers);
+
     return http.get(
-      FloobApi._parseUri(path: path, query: query),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
+      uri,
+      headers: headers ??
+          <String, String>{
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
     );
   }
 
-  // Todo other http actions like put, post, delete....
+  /// Sends a PUT request to the given path with the given query parameters, headers and body.
+  static Future<http.Response> put(
+    String path, {
+    Map<String, dynamic>? query,
+    Map<String, String>? body,
+    Map<String, String>? headers,
+  }) {
+    Uri uri = FloobApi._parseUri(path: path, query: query);
+    FloobApi._log('PUT', uri: uri, body: body, headers: headers);
+
+    return http.put(
+      uri,
+      body: body,
+      headers: headers ??
+          <String, String>{
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+          },
+    );
+  }
+
+  /// Sends a POST request to the given path with the given query parameters, headers and body.
+  static Future<http.Response> post(
+    String path, {
+    Map<String, dynamic>? query,
+    Map<String, String>? body,
+    Map<String, String>? headers,
+  }) {
+    Uri uri = FloobApi._parseUri(path: path, query: query);
+    FloobApi._log('POST', uri: uri, body: body, headers: headers);
+
+    return http.post(
+      uri,
+      body: body,
+      headers: headers ??
+          <String, String>{
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+          },
+    );
+  }
+
+  /// Sends a DELETE request to the given path with the given query parameters, headers and body.
+  static Future<http.Response> delete(
+    String path, {
+    Map<String, dynamic>? query,
+    Map<String, String>? body,
+    Map<String, String>? headers,
+  }) {
+    Uri uri = FloobApi._parseUri(path: path, query: query);
+    FloobApi._log('DELETE', uri: uri, body: body, headers: headers);
+
+    return http.delete(
+      uri,
+      body: body,
+      headers: headers ??
+          <String, String>{
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+          },
+    );
+  }
 
   // |===================|
   // |  General Helpers  |
@@ -67,5 +140,30 @@ class FloobApi {
     return FloobApi.getListFromResponseData(response)
         .map((dynamic item) => fromJson(item as Map<String, dynamic>))
         .toList();
+  }
+
+  static void _log(
+    String requestType, {
+    Uri? uri,
+    Map<String, String>? body,
+    Map<String, String>? headers,
+  }) {
+    String timestamp = DateTime.now().toIso8601String().split('T')[1];
+    String message = '[$timestamp] $requestType {';
+
+    if (uri != null) {
+      message += '\n  Uri: "$uri",';
+    }
+
+    if (body != null) {
+      message += '\n  Body: $body,';
+    }
+
+    if (headers != null) {
+      message += '\n  Headers: $headers,';
+    }
+
+    message += '\n}';
+    log(message);
   }
 }
