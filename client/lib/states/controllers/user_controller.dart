@@ -14,9 +14,9 @@ final Provider<UserController> userControllerProvider =
 class UserController extends BaseController {
   const UserController();
 
-  Future<List<User>> getUsers() async {
+  Future<List<User>> getUsers({Map<String, dynamic>? query}) async {
     // Send the request
-    final Response response = await FloobApi.get('/users');
+    final Response response = await FloobApi.get('/users', query: query);
 
     // Abort if the status code is not 200
     if (response.statusCode != 200) {
@@ -27,9 +27,9 @@ class UserController extends BaseController {
     return FloobApi.parseMany(response, User.fromJson);
   }
 
-  Future<User?> getUser(String id) async {
+  Future<User?> getUser(String id, {Map<String, dynamic>? query}) async {
     // Send the request
-    final Response response = await FloobApi.get('/users/$id');
+    final Response response = await FloobApi.get('/users/$id', query: query);
 
     // Abort if the status code is not 200
     if (response.statusCode != 200) {
