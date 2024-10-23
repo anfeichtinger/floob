@@ -22,6 +22,8 @@ class UserResource extends JsonResource
             'remember_token' => $this->when($request->remember, $this->remember_token),
             'badges' => BadgeResource::collection($this->whenLoaded('badges')),
             'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
