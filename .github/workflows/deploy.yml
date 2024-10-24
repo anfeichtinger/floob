@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  trigger:
+  deployment:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +17,4 @@ jobs:
           username: www-data
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 422
-          script: |
-            /var/www/refresh-floob.feichtinger.dev.sh
+          script: bash /var/www/refresh-floob.feichtinger.dev.sh
