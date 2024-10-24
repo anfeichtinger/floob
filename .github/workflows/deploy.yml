@@ -1,0 +1,21 @@
+name: Trigger deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run the deployment script on the server
+        uses: appleboy/ssh-action@master
+        with:
+          host: feichtinger.dev
+          username: www-data
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            /var/www/refresh-floob.feichtinger.dev.sh
