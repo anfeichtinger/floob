@@ -30,8 +30,8 @@ class LocationController extends BaseController {
   Future<Location?> getLocation(String id,
       {Map<String, dynamic>? query}) async {
     // Send the request
-    final Response response = await FloobApi.put('/locations/$id',
-        query: query, body: <String, String>{'test': 'data'});
+    final Response response =
+        await FloobApi.get('/locations/$id', query: query);
 
     // Abort if the status code is not 200
     if (response.statusCode != 200) {
