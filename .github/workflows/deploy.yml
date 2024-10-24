@@ -16,6 +16,6 @@ jobs:
           host: feichtinger.dev
           username: www-data
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
+          port: 422
           script: |
             /var/www/refresh-floob.feichtinger.dev.sh
