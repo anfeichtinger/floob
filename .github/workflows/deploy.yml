@@ -3,7 +3,7 @@ name: Trigger deployment
 on:
   push:
     branches:
-      - master
+      - deployment
 
 jobs:
   deployment:
