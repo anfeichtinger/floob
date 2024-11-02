@@ -9,6 +9,9 @@ class Style {
   // | Border radius |
   // =================
 
+  /// Max circular radius: infinity
+  static const Radius radiusFull = Radius.circular(double.infinity);
+
   /// Large circular radius: 24
   static const Radius radiusLg = Radius.circular(24);
 

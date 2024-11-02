@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
 final AutoDisposeChangeNotifierProvider<ThemeModeState> themeProvider =
-    ChangeNotifierProvider.autoDispose(
-        (AutoDisposeChangeNotifierProviderRef<ThemeModeState> ref) {
+    ChangeNotifierProvider.autoDispose((Ref<ThemeModeState> ref) {
   return ThemeModeState();
 });
 

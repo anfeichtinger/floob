@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 /// Define the provider with which we can access the controller in the view.
 final Provider<UserController> userControllerProvider =
-    Provider<UserController>((ProviderRef<Object?> ref) {
+    Provider<UserController>((Ref<Object?> ref) {
   return const UserController();
 });
 
