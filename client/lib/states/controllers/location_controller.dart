@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 /// Define the provider with which we can access the controller in the view.
 final Provider<LocationController> locationControllerProvider =
-    Provider<LocationController>((ProviderRef<Object?> ref) {
+    Provider<LocationController>((Ref<Object?> ref) {
   return const LocationController();
 });
 

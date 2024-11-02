@@ -9,7 +9,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'states/theme_mode_state.dart';
-import 'ui/screens/skeleton_screen.dart';
+import 'ui/screens/map_screen.dart';
 
 /// Try using const constructors as much as possible!
 
@@ -61,7 +61,7 @@ class MyApp extends ConsumerWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: const SkeletonScreen(),
+      home: const MapScreen(),
     );
   }
 }

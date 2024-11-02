@@ -1,24 +1,27 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
+import 'package:flutter_production_boilerplate_riverpod/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unicons/unicons.dart';
 
-import '../widgets/settings_screen/theme_card.dart';
-import '../widgets/header.dart';
+import '../../widgets/settings_screen/theme_card.dart';
+import '../../widgets/header.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Material(
-      color: Theme.of(context).colorScheme.surface,
-      child: ListView(
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      appBar: const AppBarGone(),
+      body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          const Header(text: 'app_name'),
+          const Header(text: 'Settings', hasBackAction: true),
 
           Card(
             elevation: 0,
@@ -53,7 +56,8 @@ class SettingsScreen extends ConsumerWidget {
                 child: Row(
                   children: <Widget>[
                     Icon(
-                      FluentIcons.local_language_24_regular,
+                      UniconsLine.english_to_chinese,
+                      // FluentIcons.local_language_24_regular,
                       color: Theme.of(context).colorScheme.primary,
                       size: 24,
                     ),
@@ -79,21 +83,25 @@ class SettingsScreen extends ConsumerWidget {
             children: <ThemeCard>[
               ThemeCard(
                 mode: ThemeMode.system,
-                icon: FluentIcons.dark_theme_24_regular,
+                icon: UniconsLine.adjust_half,
+                // icon: FluentIcons.dark_theme_24_regular,
               ),
               ThemeCard(
                 mode: ThemeMode.light,
-                icon: FluentIcons.weather_sunny_24_regular,
+                icon: UniconsLine.sun,
+                // icon: FluentIcons.weather_sunny_24_regular,
               ),
               ThemeCard(
                 mode: ThemeMode.dark,
-                icon: FluentIcons.weather_moon_24_regular,
+                icon: UniconsLine.moon,
+                // icon: FluentIcons.weather_moon_24_regular,
               ),
             ],
           ),
           const SizedBox(height: 36),
         ],
       ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 }
