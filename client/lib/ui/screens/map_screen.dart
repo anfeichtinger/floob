@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/screens/menu/menu_screen.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/widgets/app_bar_gone.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/widgets/bottom_sheet_handle.dart';
-import 'package:flutter_production_boilerplate_riverpod/utils/route_builder.dart';
+import 'package:floob/config/style.dart';
+import 'package:floob/ui/screens/menu/menu_screen.dart';
+import 'package:floob/ui/widgets/app_bar_gone.dart';
+import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
+import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MapScreen extends ConsumerWidget {

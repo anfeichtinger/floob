@@ -1,6 +1,6 @@
 {
-    "name": "flutter_production_boilerplate_riverpod",
-    "short_name": "flutter_production_boilerplate_riverpod",
+    "name": "floob",
+    "short_name": "floob",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

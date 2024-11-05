@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
+import 'package:floob/config/style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../states/theme_mode_state.dart';

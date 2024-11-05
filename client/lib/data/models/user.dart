@@ -1,4 +1,4 @@
-import 'package:flutter_production_boilerplate_riverpod/data/models/base_model.dart';
+import 'package:floob/data/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
