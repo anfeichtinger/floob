@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/ui/screens/menu/menu_screen.dart';
@@ -58,7 +59,8 @@ class BottomSheetWidget extends StatelessWidget {
       snapSizes: const <double>[.15, .7, 1],
       shouldCloseOnMinExtent: false,
       // On mobile only show search bar. On others take more space as drag does not work.
-      initialChildSize: Platform.isAndroid || Platform.isIOS ? 0.15 : 0.4,
+      initialChildSize:
+          !kIsWeb && (Platform.isAndroid || Platform.isIOS) ? 0.15 : 0.4,
       minChildSize: 0.15,
       builder: (BuildContext context, ScrollController scrollController) {
         return SingleChildScrollView(
