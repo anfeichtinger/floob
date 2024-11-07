@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/widgets/app_bar_gone.dart';
+import 'package:floob/config/style.dart';
+import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unicons/unicons.dart';
 

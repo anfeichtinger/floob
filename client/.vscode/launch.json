@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_production_boilerplate_riverpod",
+            "name": "floob",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "flutter_production_boilerplate_riverpod (profile mode)",
+            "name": "floob (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "flutter_production_boilerplate_riverpod (release mode)",
+            "name": "floob (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

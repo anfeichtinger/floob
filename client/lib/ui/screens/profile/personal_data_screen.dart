@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/widgets/app_bar_gone.dart';
-import 'package:flutter_production_boilerplate_riverpod/ui/widgets/header.dart';
+import 'package:floob/ui/widgets/app_bar_gone.dart';
+import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PersonalDataScreen extends ConsumerWidget {

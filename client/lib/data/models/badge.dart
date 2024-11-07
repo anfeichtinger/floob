@@ -1,5 +1,5 @@
-import 'package:flutter_production_boilerplate_riverpod/data/models/base_model.dart';
-import 'package:flutter_production_boilerplate_riverpod/data/models/user.dart';
+import 'package:floob/data/models/base_model.dart';
+import 'package:floob/data/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'badge.g.dart';
