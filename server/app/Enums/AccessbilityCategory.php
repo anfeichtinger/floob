@@ -13,4 +13,18 @@ enum AccessbilityCategory: string
     case STAIRS = 'stairs';
     case RESTROOMS = 'restrooms';
     case MOBILITY = 'mobility';
+
+    /**
+     * Creates an array where the keys are the categories and
+     * the respective entries are the values.
+     */
+    public static function withEntries(): array
+    {
+        $result = [];
+        foreach (AccessbilityEntry::cases() as $entry) {
+            $result[$entry->toCategory()?->value ?? 'unknown'][] = $entry->value;
+        }
+
+        return $result;
+    }
 }
