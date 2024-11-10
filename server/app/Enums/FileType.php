@@ -10,5 +10,5 @@ enum FileType: string
 
     case AVATAR = 'avatar';
 
-    // Todo more!
+    // TODO: F-98
 }

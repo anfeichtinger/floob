@@ -14,5 +14,5 @@ enum AccessbilityEntry: string
     case AUTOMATIC_MAIN_ENTRANCE = 'automatic_main_entrance';
     case EXTRA_ENTRANCE = 'extra_entrance';
 
-    // TODO
+    //TODO: F-96
 }
