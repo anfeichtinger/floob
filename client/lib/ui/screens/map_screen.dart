@@ -8,6 +8,7 @@ import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
 class MapScreen extends ConsumerWidget {
   const MapScreen({super.key});
@@ -29,21 +30,25 @@ class MapScreen extends ConsumerWidget {
   }
 }
 
-/// Placeholder for the OpenStreetMap
 class OpenStreetMapWidget extends StatelessWidget {
   const OpenStreetMapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.primary,
-      child: const Center(
-        child: Text(
-          'Open Street Map here',
-          style: TextStyle(fontWeight: FontWeight.bold),
+    return OSMViewer(
+        controller: SimpleMapController(
+          initPosition: GeoPoint(
+            latitude: 47.4358055,
+            longitude: 8.4737324,
+          ),
+          markerHome: const MarkerIcon(
+            icon: Icon(Icons.home),
+          ),
         ),
-      ),
-    );
+        zoomOption: const ZoomOption(
+          initZoom: 16,
+          minZoomLevel: 11,
+        ));
   }
 }
 
