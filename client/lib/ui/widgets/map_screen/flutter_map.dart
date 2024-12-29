@@ -27,7 +27,7 @@ class MapWidgetState extends State<MapWidget> {
         initialCenter: LatLng(30.3753, 69.3451),
         initialZoom: 5,
       ),
-      children: [
+      children: <Widget>[
         TileLayer(
           urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           subdomains: const <String>['a', 'b', 'c'],
