@@ -1,16 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:floob/data/models/open_street_map/overpass_data.dart';
+import 'package:floob/states/controllers/open_street_map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
-class MapWidget extends StatefulWidget {
+class MapWidget extends ConsumerStatefulWidget {
   const MapWidget({super.key});
 
   @override
   MapWidgetState createState() => MapWidgetState();
 }
 
-class MapWidgetState extends State<MapWidget> {
+class MapWidgetState extends ConsumerState<MapWidget> {
   final MapController mapController = MapController();
 
   @override
@@ -21,11 +24,22 @@ class MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final WidgetRef ref = context as WidgetRef;
     return FlutterMap(
       mapController: mapController,
-      options: const MapOptions(
-        initialCenter: LatLng(30.3753, 69.3451),
-        initialZoom: 5,
+      options: MapOptions(
+        initialCenter: const LatLng(47.0690121, 15.4062616), // FH Joanneum Graz
+        initialZoom: 18,
+        onTap: (TapPosition tapPosition, LatLng point) async {
+          final List<OverpassData> result = await ref
+              .read(openStreetMapControllerProvider)
+              .fetchFeatures(point);
+
+          print('\n\nNearby places:');
+          for (OverpassData data in result) {
+            print(data.name);
+          }
+        },
       ),
       children: <Widget>[
         TileLayer(
