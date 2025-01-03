@@ -9,7 +9,7 @@ part of 'overpass_response.dart';
 OverpassResponse _$OverpassResponseFromJson(Map<String, dynamic> json) =>
     OverpassResponse(
       elements: (json['elements'] as List<dynamic>)
-          .map((e) => OverpassData.fromJson(e as Map<String, dynamic>))
+          .map((dynamic e) => OverpassData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
