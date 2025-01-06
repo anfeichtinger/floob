@@ -2,5 +2,42 @@
   "app_name": "floob",
   "bottom_nav_first": "Home",
   "bottom_nav_second": "Settings",
-  "language_switch_title": "German translation"
+  "language_switch_title": "German translation",
+  
+  "login_email": "Email Address",
+  "login_password": "Password",
+  "login_submit": "Login",
+  "login_register": "Register",
+  "login_forgot_password": "Forgot Password",
+  "login_invalid_credentials": "Invalid Credentials",
+  
+  "register_repeat_password": "Repeat Password",
+  "register_submit": "Register",
+  "register_cancel": "Back to Login",
+  
+  "reset_password_submit": "Reset Password",
+  
+  "profile_title": "Profile",
+  "profile_personal_data": "Personal Data",
+  "profile_statistics": "Statistics & Badges",
+  "profile_settings": "Settings",
+  "profile_logout": "Logout",
+  "profile_email": "Email Address",
+  "profile_fav_color": "Favorite Color",
+  "profile_save": "Save",
+  "profile_rated_buildings": "Rated Buildings",
+  "profile_rated_categories": "Rated Categories",
+  "profile_most_frequent_category": "Most Frequent Category",
+  "profile_available_badges": "Available Badges",
+  
+  "settings_title": "Settings",
+  "settings_language": "Language",
+  "settings_language_english": "English",
+  "settings_language_german": "German",
+  "settings_easy_mode": "Easy Mode",
+  "settings_theme": "Theme",
+  "settings_theme_light": "Light",
+  "settings_theme_dark": "Dark",
+  "settings_theme_system": "System",
+  "settings_save": "Save"
 }

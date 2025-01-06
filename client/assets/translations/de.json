@@ -2,5 +2,42 @@
   "app_name": "floob",
   "bottom_nav_first": "Start",
   "bottom_nav_second": "Einstellungen",
-  "language_switch_title": "Deutsche Übersetzung"
+  "language_switch_title": "Deutsche Übersetzung",
+
+  "login_email": "E-Mail Adresse",
+  "login_password": "Passwort",
+  "login_submit": "Anmelden",
+  "login_register": "Registrieren",
+  "login_forgot_password": "Passwort vergessen",
+  "login_invalid_credentials": "Ungültige Anmeldeinformationen",
+  
+  "register_repeat_password": "Passwort wiederholen",
+  "register_submit": "Registrieren",
+  "register_cancel": "Zurück zur Anmeldung",
+
+  "reset_password_submit": "Passwort zurücksetzen",
+
+  "profile_title": "Profil",
+  "profile_personal_data": "Steckbrief",
+  "profile_statistics": "Statistiken & Badges",
+  "profile_settings": "Einstellungen",
+  "profile_logout": "Abmelden",
+  "profile_email": "E-Mail Adresse",
+  "profile_fav_color": "Bevorzugte Farbe",
+  "profile_save": "Speichern",
+  "profile_rated_buildings": "Bewertete Gebäude",
+  "profile_rated_categories": "Bewertete Kategorien",
+  "profile_most_frequent_category": "Häufigste Kategorie",
+  "profile_available_badges": "Verfügbare Badges",
+
+  "settings_title": "Einstellungen",
+  "settings_language": "Sprache",
+  "settings_language_english": "Englisch",
+  "settings_language_german": "Deutsch",
+  "settings_easy_mode": "Einfache Darstellung",
+  "settings_theme": "Thema",
+  "settings_theme_light": "Hell",
+  "settings_theme_dark": "Dunkel",
+  "settings_theme_system": "System",
+  "settings_save": "Speichern"
 }

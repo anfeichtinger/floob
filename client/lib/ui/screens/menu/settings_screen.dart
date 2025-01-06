@@ -21,7 +21,7 @@ class SettingsScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          const Header(text: 'Settings', hasBackAction: true),
+          Header(text: tr('settings_title'), hasBackAction: true),
 
           Card(
             elevation: 0,
