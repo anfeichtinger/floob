@@ -7,6 +7,7 @@ import 'package:floob/ui/widgets/header.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:floob/config/style.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -21,7 +22,7 @@ class ProfileScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          Header(text: tr('profile_title')),
+          const Header(text: 'profile_title'),
 
           // Logo Image
           Center(
@@ -59,7 +60,7 @@ class ProfileScreen extends ConsumerWidget {
               color: Colors.black,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(Style.radiusMd.x),
               side: const BorderSide(color: Colors.black),
             ),
             onTap: () {
@@ -88,7 +89,7 @@ class ProfileScreen extends ConsumerWidget {
               color: Colors.black,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(Style.radiusMd.x),
               side: const BorderSide(color: Colors.black),
             ),
             onTap: () {
@@ -117,7 +118,7 @@ class ProfileScreen extends ConsumerWidget {
               color: Colors.black,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: BorderRadius.circular(Style.radiusMd.x),
               side: const BorderSide(color: Colors.black),
             ),
             onTap: () {
