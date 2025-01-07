@@ -3,6 +3,7 @@ import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:floob/config/style.dart';
 
 class PersonalDataScreen extends ConsumerStatefulWidget {
   const PersonalDataScreen({super.key});
@@ -48,7 +49,8 @@ class _PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               physics: const BouncingScrollPhysics(),
               children: <Widget>[
-                Header(text: tr('profile_personal_data'), hasBackAction: true),
+                const Header(
+                    text: 'profile_personal_data', hasBackAction: true),
                 Center(
                   child: Image.asset(
                     'assets/img/logo-full-512x512.png',
@@ -60,7 +62,9 @@ class _PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
                   decoration: InputDecoration(
                     labelText: tr('profile_email'),
                     labelStyle: textStyle,
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                    ),
                   ),
                   style: textStyle,
                 ),
@@ -69,7 +73,9 @@ class _PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
                   decoration: InputDecoration(
                     labelText: tr('profile_fav_color'),
                     labelStyle: textStyle,
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                    ),
                   ),
                   value: _selectedColor,
                   items: _colors.map((Color color) {
@@ -105,7 +111,7 @@ class _PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
                 ),
                 shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(Style.radiusSm.x),
                   ),
                 ),
               ),
