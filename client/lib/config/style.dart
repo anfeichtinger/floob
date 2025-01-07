@@ -51,7 +51,7 @@ class Style {
     // Divider
     dividerColor: gray300,
     // Used for shadows and in this project also borders of cards
-    shadowColor: Colors.black.withAlpha(25),
+    shadowColor: Colors.black.withValues(alpha: .1),
     // Specific text styles and fonts
     textTheme: ThemeData.light(useMaterial3: true).textTheme.apply(
           fontFamily: 'Nunito',
@@ -102,7 +102,7 @@ class Style {
     // Divider
     dividerColor: gray600,
     // Used for shadows and in this project also borders of cards
-    shadowColor: Colors.white.withAlpha(25),
+    shadowColor: Colors.white.withValues(alpha: .1),
     // Specific text styles and fonts
     textTheme: ThemeData.dark(useMaterial3: true).textTheme.apply(
           fontFamily: 'Nunito',
