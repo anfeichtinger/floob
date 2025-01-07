@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:floob/config/style.dart';
 
 class StatisticsScreen extends ConsumerWidget {
   const StatisticsScreen({super.key});
@@ -17,8 +18,8 @@ class StatisticsScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          Header(
-            text: tr('profile_statistics'),
+          const Header(
+            text: 'profile_statistics',
             hasBackAction: true,
           ),
           const SizedBox(height: 20),
@@ -31,7 +32,7 @@ class StatisticsScreen extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(Style.radiusSm.x),
               ),
             ),
             controller: TextEditingController(text: '6'),
@@ -52,7 +53,7 @@ class StatisticsScreen extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(Style.radiusSm.x),
               ),
             ),
             controller: TextEditingController(text: '11'),
@@ -73,7 +74,7 @@ class StatisticsScreen extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(Style.radiusSm.x),
               ),
             ),
             controller: TextEditingController(text: 'Treppen & Aufzüge'),
@@ -88,7 +89,7 @@ class StatisticsScreen extends ConsumerWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(Style.radiusSm.x),
             ),
             padding: const EdgeInsets.all(10),
             constraints: BoxConstraints(
