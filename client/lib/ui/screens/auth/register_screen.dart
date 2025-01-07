@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:floob/config/style.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,7 +56,7 @@ class RegisterScreen extends ConsumerWidget {
               ),
               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(Style.radiusSm.x),
                 ),
               ),
             ),
