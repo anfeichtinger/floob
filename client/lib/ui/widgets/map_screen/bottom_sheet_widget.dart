@@ -86,7 +86,7 @@ class BottomSheetWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    height: MediaQuery.of(context).size.height / 1.2,
+                    height: MediaQuery.of(context).size.height - 128,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Style.radiusMd),
                       color: Theme.of(context).colorScheme.surface,
