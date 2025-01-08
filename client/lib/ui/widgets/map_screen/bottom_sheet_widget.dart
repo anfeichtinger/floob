@@ -3,15 +3,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/config/style.dart';
-import 'package:floob/ui/screens/menu/menu_screen.dart';
 import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:floob/utils/route_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:floob/ui/screens/profile/profile_screen.dart';
 
-class BottomSheetWidget extends StatelessWidget {
+class BottomSheetWidget extends ConsumerWidget {
   const BottomSheetWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DraggableScrollableSheet(
       expand: true,
       snap: true,
@@ -71,7 +72,7 @@ class BottomSheetWidget extends StatelessWidget {
                           customBorder: const CircleBorder(),
                           onTap: () {
                             Navigator.of(context).push(animatedRoute(
-                              const MenuScreen(),
+                              const ProfileScreen(),
                               type: RouteAnimationType.fromBottom,
                             ));
                           },
