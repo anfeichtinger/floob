@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegisterScreen extends ConsumerWidget {
-  const RegisterScreen({super.key});
+class ResetPasswordScreen extends ConsumerWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,17 +27,9 @@ class RegisterScreen extends ConsumerWidget {
           const SizedBox(height: 64),
           TextFormField(
             decoration: InputDecoration(
-              labelText: tr('login_email'),
-              border: const OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 32),
-          TextFormField(
-            decoration: InputDecoration(
               labelText: tr('login_password'),
               border: const OutlineInputBorder(),
             ),
-            obscureText: true,
           ),
           const SizedBox(height: 32),
           TextFormField(
@@ -60,7 +52,7 @@ class RegisterScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            child: Text(tr('register_submit')),
+            child: Text(tr('reset_password_submit')),
           ),
           const SizedBox(height: 32),
           TextButton(
