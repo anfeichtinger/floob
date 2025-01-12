@@ -4,11 +4,11 @@ import 'package:floob/states/bottom_sheet/bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/overpass_results_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
 import 'package:floob/states/controllers/open_street_map_controller.dart';
+import 'package:floob/ui/screens/profile/profile_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/config/style.dart';
-import 'package:floob/ui/screens/menu/menu_screen.dart';
 import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -99,7 +99,7 @@ class BottomSheetWidget extends ConsumerWidget {
                           customBorder: const CircleBorder(),
                           onTap: () {
                             Navigator.of(context).push(animatedRoute(
-                              const MenuScreen(),
+                              const ProfileScreen(),
                               type: RouteAnimationType.fromBottom,
                             ));
                           },
