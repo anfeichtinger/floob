@@ -25,5 +25,6 @@ class OverpassData {
 
   /// Connect the generated [_$OverpassDataToJson] function to the `toJson` method.
   @override
+  // ignore: override_on_non_overriding_member
   Map<String, dynamic> toJson() => _$OverpassDataToJson(this);
 }

@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:floob/config/style.dart';
-import 'package:floob/data/models/open_street_map/overpass_data.dart';
-import 'package:floob/states/controllers/open_street_map_controller.dart';
-import 'package:floob/ui/widgets/map_screen/location_list_tile.dart';
-import 'package:flutter/foundation.dart';
+import 'package:floob/states/bottom_sheet/search_text_controller.dart';
+import 'package:floob/states/bottom_sheet/bottom_sheet_controller.dart';
+import 'package:floob/states/map/map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:unicons/unicons.dart';
 
 class MapWidget extends ConsumerStatefulWidget {
   const MapWidget({super.key});
@@ -18,34 +16,44 @@ class MapWidget extends ConsumerStatefulWidget {
 }
 
 class MapWidgetState extends ConsumerState<MapWidget> {
-  final MapController mapController = MapController();
+  final PopupController _popupLayerController = PopupController();
   List<Marker> markers = <Marker>[];
 
   @override
   void dispose() {
-    mapController.dispose();
+    _popupLayerController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final WidgetRef ref = context as WidgetRef;
+    final MapController controller =
+        ref.read(mapControllerProvider).controller!;
+
     return FlutterMap(
-      mapController: mapController,
+      mapController: controller,
       options: MapOptions(
         initialCenter: const LatLng(47.0690121, 15.4062616), // FH Joanneum Graz
         initialZoom: 18,
-        onTap: (TapPosition tapPosition, LatLng point) async {
-          final List<OverpassData> result = await ref
-              .read(openStreetMapControllerProvider)
-              .fetchFeatures(point);
+        onTap: (TapPosition tapPosition, LatLng point) {
+          // Center map around tap position
+          controller.rotate(0);
+          controller.move(point, 19,
+              offset: Offset(0, MediaQuery.of(context).size.height / -3));
 
-          // Add Popup with nearby places in GUI
-          Marker onTapMarker = _buildOnTapMarker(point, result);
-          // Do as little code as possible in the setState function!
-          setState(() {
-            markers = <Marker>[onTapMarker];
-          });
+          // Extend bottom sheet to show results
+          final DraggableScrollableController bottomSheetController =
+              ref.read(bottomSheetControllerProvider).controller!;
+
+          bottomSheetController.animateTo(.70,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.linear);
+
+          final TextEditingController searchTextController =
+              ref.read(searchTextControllerProvider).controller!;
+
+          searchTextController.text = '°${point.latitude},°${point.longitude}';
         },
       ),
       children: <Widget>[
@@ -54,57 +62,14 @@ class MapWidgetState extends ConsumerState<MapWidget> {
           subdomains: const <String>['a', 'b', 'c'],
           tileProvider: AppMapTileProvider(),
         ),
-        MarkerLayer(markers: markers),
+        // MarkerLayer(markers: markers),
+        PopupMarkerLayer(
+          options: PopupMarkerLayerOptions(
+            markers: markers,
+            popupController: _popupLayerController,
+          ),
+        ),
       ],
-    );
-  }
-
-  // The popover that is rendered when tapping the map. Shows the nearby places.
-  Marker _buildOnTapMarker(LatLng point, List<OverpassData> elements) {
-    return Marker(
-      point: point,
-      alignment: Alignment.bottomCenter,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        clipBehavior: Clip.none,
-        children: <Widget>[
-          Transform(
-            transform: Matrix4.identity()..scale(1.0, -.8),
-            child: Icon(
-              UniconsSolid.triangle,
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              size: 36,
-            ),
-          ),
-          Positioned(
-            bottom: 48,
-            width: clampDouble(MediaQuery.of(context).size.width / 4, 304, 999),
-            child: Card(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Style.radiusMd),
-              ),
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  // Divider between results
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(height: 1);
-                  },
-                  itemCount: elements.isEmpty ? 1 : elements.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    // Empty state
-                    if (elements.isEmpty) {
-                      return const ListTile(
-                        title: Text('Nothing here...'),
-                      );
-                    }
-
-                    return LocationListTile(location: elements[index]);
-                  }),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

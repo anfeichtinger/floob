@@ -20,7 +20,7 @@ class OpenStreetMapController extends BaseController {
   const OpenStreetMapController();
 
   Future<List<OverpassData>> fetchFeatures(LatLng point,
-      {int radius = 10}) async {
+      {int radius = 20}) async {
     // Overpass QL query
     final String query = '''
   [out:json];
