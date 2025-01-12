@@ -111,7 +111,7 @@ class StatisticsScreen extends ConsumerWidget {
                       horizontal: MediaQuery.of(context).size.width * 0.1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(
+                    children: List<Widget>.generate(
                       4,
                       (int index) => Container(
                         width: 40,

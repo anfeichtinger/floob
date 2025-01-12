@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:latlong2/latlong.dart';
 
 part 'overpass_data.g.dart';
 
@@ -9,6 +10,7 @@ class OverpassData {
   final Map<String, dynamic>? tags;
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get name => tags?['name'] as String?;
+  LatLng? get point => LatLng(lat ?? 0, lon ?? 0);
 
   OverpassData({
     this.id,
@@ -23,5 +25,6 @@ class OverpassData {
 
   /// Connect the generated [_$OverpassDataToJson] function to the `toJson` method.
   @override
+  // ignore: override_on_non_overriding_member
   Map<String, dynamic> toJson() => _$OverpassDataToJson(this);
 }

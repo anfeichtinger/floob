@@ -9,10 +9,10 @@ class PersonalDataScreen extends ConsumerStatefulWidget {
   const PersonalDataScreen({super.key});
 
   @override
-  _PersonalDataScreenState createState() => _PersonalDataScreenState();
+  PersonalDataScreenState createState() => PersonalDataScreenState();
 }
 
-class _PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
+class PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
   Color? _selectedColor;
   final List<Color> _colors = <Color>[
     Colors.red,
