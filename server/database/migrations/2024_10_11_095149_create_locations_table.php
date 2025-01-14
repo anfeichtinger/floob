@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('overpass_id');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('name');
             $table->string('website')->nullable()->default(null);
             $table->string('opening_times')->nullable()->default(null);
+            $table->json('overpass_data')->nullable()->default(null);
             $table->timestamps();
         });
     }

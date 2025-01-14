@@ -17,6 +17,7 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
+            'overpass_id' => fake()->biasedNumberBetween(1000000000, 9999999999),
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'name' => fake()->name(),
