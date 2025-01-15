@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\v1\LocationController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
-#region Users
+# region Users
 Route::controller(UserController::class)->prefix('/users')->group(function () {
     // Auth
     Route::post('/register', 'register');
@@ -16,12 +16,13 @@ Route::controller(UserController::class)->prefix('/users')->group(function () {
     Route::get('/paginate', 'paginateUsers');
     Route::get('/{id}', 'getUser');
 });
-#endregion Users
+# endregion Users
 
-#region Locations
+# region Locations
 Route::controller(LocationController::class)->prefix('/locations')->group(function () {
     Route::get('/', 'getLocations');
     Route::get('/paginate', 'paginateLocations');
+    Route::get('/latlng', 'getLocationsByLatLng');
     Route::get('/{id}', 'getLocation');
 });
-#endregion Locations
+# endregion Locations
