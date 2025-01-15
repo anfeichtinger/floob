@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'package:floob/data/models/open_street_map/overpass_data.dart';
+import 'package:floob/data/models/location.dart';
 import 'package:floob/states/bottom_sheet/bottom_sheet_controller.dart';
-import 'package:floob/states/bottom_sheet/overpass_results_controller.dart';
+import 'package:floob/states/bottom_sheet/location_list_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
-import 'package:floob/states/controllers/open_street_map_controller.dart';
+import 'package:floob/states/controllers/location_controller.dart';
 import 'package:floob/ui/screens/profile/profile_screen.dart';
+import 'package:floob/ui/widgets/list_tile_x.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:unicons/unicons.dart';
 
 class BottomSheetWidget extends ConsumerWidget {
   const BottomSheetWidget({super.key});
@@ -32,9 +34,8 @@ class BottomSheetWidget extends ConsumerWidget {
     searchController
         .addListener(() => _onSearchChanged(searchController.text, ref));
 
-    // The overpass results to show
-    final List<OverpassData> results =
-        ref.watch(overpassResultsProvider).results;
+    // The results to show
+    final List<Location> results = ref.watch(locationListProvider).results;
 
     return DraggableScrollableSheet(
       controller: controller,
@@ -131,14 +132,26 @@ class BottomSheetWidget extends ConsumerWidget {
                         }
                         return Column(
                           children: <Widget>[
-                            ListTile(
-                              leading: Container(
-                                height: 64,
-                                width: 64,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      const BorderRadius.all(Style.radiusSm),
+                            ListTileX(
+                              leading: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Style.radiusMd),
+                                child: Container(
+                                  height: 80.0,
+                                  width: 80.0,
                                   color: Theme.of(context).colorScheme.primary,
+                                  child: Image.network(
+                                    results[index].imageUrl ?? '',
+                                    height: 80,
+                                    width: 80,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (BuildContext context,
+                                            Object obj, StackTrace? trace) =>
+                                        const Icon(
+                                      UniconsLine.image_slash,
+                                      size: 36,
+                                    ),
+                                  ),
                                 ),
                               ),
                               title: Text(
@@ -153,7 +166,7 @@ class BottomSheetWidget extends ConsumerWidget {
                                       RatingBarIndicator(
                                         itemCount: 5,
                                         itemSize: 20,
-                                        rating: 4,
+                                        rating: results[index].reviewScore,
                                         itemBuilder:
                                             (BuildContext context, _) =>
                                                 const Icon(
@@ -161,33 +174,33 @@ class BottomSheetWidget extends ConsumerWidget {
                                           color: Colors.amber,
                                         ),
                                       ),
-                                      const Text('(4.0)'),
+                                      Text(
+                                          '(${results[index].reviewScore.toStringAsFixed(1)})'),
                                     ],
                                   ),
-                                  const Text('geteilte Erfahrungen: 3'),
-                                  Text('Barrierefreiheit: 96%',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(color: Colors.green)),
+                                  Text(
+                                      'geteilte Erfahrungen: ${results[index].reviewCount}'),
                                 ],
                               ),
-                            ),
-                            // Actions
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                TextButton(
-                                  onPressed: () => print('Todo details'),
-                                  child: const Text('Details anzeigen'),
+                              before: const SizedBox(height: 16),
+                              after: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 4, bottom: 12),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    TextButton(
+                                      onPressed: () => print('Todo details'),
+                                      child: const Text('Details anzeigen'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => print('Todo entry'),
+                                      child: const Text('Neuer Eintrag'),
+                                    ),
+                                  ],
                                 ),
-                                TextButton(
-                                  onPressed: () => print('Todo entry'),
-                                  child: const Text('Neuer Eintrag'),
-                                ),
-                              ],
+                              ),
                             ),
-                            const SizedBox(height: 8),
                           ],
                         );
                       },
@@ -224,12 +237,13 @@ class BottomSheetWidget extends ConsumerWidget {
         return;
       }
 
-      // Fetch results
-      final List<OverpassData> results =
-          await ref.read(openStreetMapControllerProvider).fetchFeatures(point);
+      // Fetch locations near the given point
+      final List<Location> locations = await ref
+          .read(locationControllerProvider)
+          .getLocationsByLatLng(point);
 
       // Set results
-      ref.read(overpassResultsProvider).update(results);
+      ref.read(locationListProvider).update(locations);
     } else {
       print('Todo: Search by words');
     }

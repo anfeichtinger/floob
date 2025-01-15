@@ -85,6 +85,9 @@ class LocationController extends Controller
         $locations = $query->whereIn('overpass_id', $overpassResults->pluck('id')->toArray())->get();
         $result = [];
 
+        // Todo maybe merge locations with the same name.
+        // E.g there are two different ids for 'FH Joanneum'.
+
         // When a matching location exists in the database, load the overpass data into it and remove it from elements
         foreach ($overpassResults as $overpassData) {
             // Don't show locations without a name

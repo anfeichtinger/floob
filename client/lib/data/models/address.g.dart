@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'address.dart';
 
 // **************************************************************************
@@ -9,7 +7,7 @@ part of 'address.dart';
 // **************************************************************************
 
 Address _$AddressFromJson(Map<String, dynamic> json) => Address(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       addressableType: json['addressable_type'] as String?,
       addressableId: (json['addressable_id'] as num?)?.toInt(),
       addressable: json['addressable'] == null

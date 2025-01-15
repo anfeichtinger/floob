@@ -25,6 +25,7 @@ class LocationResource extends JsonResource
             'longitude' => $this->longitude,
             'name' => $this->name,
             'website' => $this->website,
+            'image_url' => $this->image_url,
             'opening_times' => $this->opening_times,
             'overpass_data' => $this->overpass_data,
             'reviews' => $reviews,

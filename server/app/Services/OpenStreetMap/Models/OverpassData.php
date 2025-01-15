@@ -9,10 +9,11 @@ class OverpassData extends Data
 {
     public function __construct(
         public ?int $id = null,
-        public ?float $lat = null,
-        public ?float $lon = null,
+        public ?string $lat = null,
+        public ?string $lon = null,
         public ?string $name = null,
         public ?string $website = null,
+        public ?string $wikidata = null,
         public ?AddressData $address = null,
     ) {}
 
@@ -37,10 +38,11 @@ class OverpassData extends Data
         // Build the final object
         return new self(
             id: $data['id'] ?? null,
-            lat: array_key_exists('lat', $data) ? floatval($data['lat'] ?? null) : $point?->latitude ?? null,
-            lon: array_key_exists('lon', $data) ? floatval($data['lon'] ?? null) : $point?->longitude ?? null,
+            lat: array_key_exists('lat', $data) ? $data['lat'] ?? null : $point?->latitude ?? null,
+            lon: array_key_exists('lon', $data) ? $data['lon'] ?? null : $point?->longitude ?? null,
             name: $data['tags']['name'] ?? $address?->format() ?? null,
             website: $data['tags']['website'] ?? null,
+            wikidata: $data['tags']['wikidata'] ?? null,
             address: $address
         );
     }

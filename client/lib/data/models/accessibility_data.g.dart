@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'accessibility_data.dart';
 
 // **************************************************************************
@@ -10,7 +8,7 @@ part of 'accessibility_data.dart';
 
 AccessibilityData _$AccessibilityDataFromJson(Map<String, dynamic> json) =>
     AccessibilityData(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       locationId: (json['location_id'] as num?)?.toInt(),
       location: json['location'] == null
           ? null

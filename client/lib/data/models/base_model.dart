@@ -4,7 +4,7 @@ part 'base_model.g.dart';
 
 @JsonSerializable()
 class BaseModel {
-  final int id;
+  final int? id;
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @JsonKey(name: 'updated_at')

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'base_model.dart';
 
 // **************************************************************************
@@ -9,7 +7,7 @@ part of 'base_model.dart';
 // **************************************************************************
 
 BaseModel _$BaseModelFromJson(Map<String, dynamic> json) => BaseModel(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

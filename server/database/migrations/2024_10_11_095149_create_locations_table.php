@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('website')->nullable()->default(null);
             $table->string('opening_times')->nullable()->default(null);
+            $table->string('image_url')->nullable()->default(null);
             $table->json('overpass_data')->nullable()->default(null);
             $table->timestamps();
         });

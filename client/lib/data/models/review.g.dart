@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'review.dart';
 
 // **************************************************************************
@@ -9,7 +7,7 @@ part of 'review.dart';
 // **************************************************************************
 
 Review _$ReviewFromJson(Map<String, dynamic> json) => Review(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       locationId: (json['location_id'] as num?)?.toInt(),
       location: json['location'] == null
           ? null

@@ -6,19 +6,35 @@ part 'location.g.dart';
 
 @JsonSerializable()
 class Location extends BaseModel {
-  final String? latitude, longitude, name, website;
+  @JsonKey(
+    fromJson: _doubleFromJson,
+  )
+  final double? latitude, longitude;
+  final String? name, website;
+  @JsonKey(name: 'image_url')
+  final String? imageUrl;
   @JsonKey(name: 'opening_times')
   final Map<String, String>? openingTimes;
+  @JsonKey(name: 'overpass_data')
+  final Map<String, dynamic>? overpassData;
   final List<Review>? reviews;
+  @JsonKey(name: 'review_count')
+  final int reviewCount;
+  @JsonKey(name: 'review_score')
+  final double reviewScore;
 
   Location({
-    required super.id,
+    super.id,
     this.latitude,
     this.longitude,
     this.name,
     this.website,
+    this.imageUrl,
     this.openingTimes,
+    this.overpassData,
     this.reviews,
+    this.reviewCount = 0,
+    this.reviewScore = 0,
     super.createdAt,
     super.updatedAt,
   });
@@ -30,4 +46,24 @@ class Location extends BaseModel {
   /// Connect the generated [_$LocationToJson] function to the `toJson` method.
   @override
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  static double _doubleFromJson(dynamic value) =>
+      double.parse(value?.toString() ?? '0');
+
+  @override
+  String toString() {
+    return '''Location {
+      id: $id,
+      latitude: $latitude,
+      longitude: $longitude,
+      name: $name,
+      website: $website,
+      imageUrl: $imageUrl,
+      openingTimes: $openingTimes,
+      overpassData: $overpassData,
+      reviews: $reviews,
+      reviewCount: $reviewCount,
+      reviewScore: $reviewScore,
+    }''';
+  }
 }

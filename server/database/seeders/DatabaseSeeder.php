@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'longitude' => 15.4062616,
             'name' => 'FH Joanneum',
             'website' => 'https://www.fh-joanneum.at/',
+            'image_url' => 'https://commons.wikimedia.org/wiki/Special:FilePath/Logo_FHJ_rgb.jpg',
         ]);
 
         // Create some reviews for the location
