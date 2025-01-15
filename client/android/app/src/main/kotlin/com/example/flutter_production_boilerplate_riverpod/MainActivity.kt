@@ -1,4 +1,4 @@
-package com.example.flutter_production_boilerplate_riverpod
+package dev.feichtinger.floob
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'accessibility_data_report.dart';
 
 // **************************************************************************
@@ -11,7 +9,7 @@ part of 'accessibility_data_report.dart';
 AccessibilityDataReport _$AccessibilityDataReportFromJson(
         Map<String, dynamic> json) =>
     AccessibilityDataReport(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       accessibilityDataId: (json['accessibility_data_id'] as num?)?.toInt(),
       accessibilityData: json['accessibility_data'] == null
           ? null

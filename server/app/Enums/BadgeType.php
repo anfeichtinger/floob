@@ -18,5 +18,5 @@ enum BadgeType: string
     case DATA_ENTRY_5 = 'data_entry_5';
     case DATA_ENTRY_10 = 'data_entry_10';
 
-    // TODO more!
+    // TODO: F-97
 }

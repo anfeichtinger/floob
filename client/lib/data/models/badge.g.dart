@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'badge.dart';
 
 // **************************************************************************
@@ -9,7 +7,7 @@ part of 'badge.dart';
 // **************************************************************************
 
 Badge _$BadgeFromJson(Map<String, dynamic> json) => Badge(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       identifier: json['identifier'] as String?,
       users: (json['users'] as List<dynamic>?)
           ?.map((e) => User.fromJson(e as Map<String, dynamic>))

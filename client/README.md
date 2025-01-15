@@ -1,6 +1,6 @@
 # Flutter Production Boilerplate Riverpod
 
-*Note: If you prefer to use BLOC instead of Riverpod you can use [flutter_production_boilerplate_riverpod](https://github.com/anfeichtinger/flutter_production_boilerplate)*
+*Note: If you prefer to use BLOC instead of Riverpod you can use [floob](https://github.com/anfeichtinger/flutter_production_boilerplate)*
 
 ## A flutter project containing riverpod, flutter_lints, hive, easy_translations and more!
 
@@ -21,8 +21,8 @@ present in your development environment.
 Clone the project and enter the project folder.
 
 ```sh
-git clone git@github.com:anfeichtinger/flutter_production_boilerplate_riverpod.git
-cd flutter_production_boilerplate_riverpod
+git clone git@github.com:anfeichtinger/floob.git
+cd floob
 ```
 
 You can remove the screenshots located in [assets/img/](./assets/img).

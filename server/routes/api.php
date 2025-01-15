@@ -22,6 +22,7 @@ Route::controller(UserController::class)->prefix('/users')->group(function () {
 Route::controller(LocationController::class)->prefix('/locations')->group(function () {
     Route::get('/', 'getLocations');
     Route::get('/paginate', 'paginateLocations');
+    Route::get('/latlng', 'getLocationsByLatLng');
     Route::get('/{id}', 'getLocation');
 });
 #endregion Locations

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Location;
+use App\Models\Review;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(3)->create();
+        $users = User::factory(3)->create();
+
+        // Create a real location
+        $location = Location::factory(1)->create([
+            'overpass_id' => 37064372,
+            'latitude' => 47.0690121,
+            'longitude' => 15.4062616,
+            'name' => 'FH Joanneum',
+            'website' => 'https://www.fh-joanneum.at/',
+            'image_url' => 'https://commons.wikimedia.org/wiki/Special:FilePath/Logo_FHJ_rgb.jpg',
+        ]);
+
+        // Create some reviews for the location
+        // Todo - Write some real text for the reviews.
+        $review1 = Review::factory(1)->create([
+            'location_id' => $location->first()->id,
+            'user_id' => $users->random()->id,
+        ]);
+        $review2 = Review::factory(1)->create([
+            'location_id' => $location->first()->id,
+            'user_id' => $users->random()->id,
+        ]);
+        $review3 = Review::factory(1)->create([
+            'location_id' => $location->first()->id,
+            'user_id' => $users->random()->id,
+        ]);
     }
 }

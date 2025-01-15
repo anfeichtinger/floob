@@ -10,6 +10,17 @@ class Address extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that should be mass assignable.
+     */
+    protected $fillable = [
+        'country',
+        'state',
+        'city',
+        'post_code',
+        'street',
+    ];
+
     #region Relations
 
     public function addressable(): MorphTo

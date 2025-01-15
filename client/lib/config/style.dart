@@ -9,6 +9,9 @@ class Style {
   // | Border radius |
   // =================
 
+  /// Max circular radius: infinity
+  static const Radius radiusFull = Radius.circular(double.infinity);
+
   /// Large circular radius: 24
   static const Radius radiusLg = Radius.circular(24);
 
@@ -48,7 +51,7 @@ class Style {
     // Divider
     dividerColor: gray300,
     // Used for shadows and in this project also borders of cards
-    shadowColor: Colors.black.withOpacity(.1),
+    shadowColor: Colors.black.withValues(alpha: .1),
     // Specific text styles and fonts
     textTheme: ThemeData.light(useMaterial3: true).textTheme.apply(
           fontFamily: 'Nunito',
@@ -99,7 +102,7 @@ class Style {
     // Divider
     dividerColor: gray600,
     // Used for shadows and in this project also borders of cards
-    shadowColor: Colors.white.withOpacity(.1),
+    shadowColor: Colors.white.withValues(alpha: .1),
     // Specific text styles and fonts
     textTheme: ThemeData.dark(useMaterial3: true).textTheme.apply(
           fontFamily: 'Nunito',

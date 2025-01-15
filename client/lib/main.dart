@@ -1,15 +1,16 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:flutter_production_boilerplate_riverpod/config/style.dart';
+import 'package:floob/config/style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'states/theme_mode_state.dart';
-import 'ui/screens/skeleton_screen.dart';
+import 'ui/screens/map_screen.dart';
 
 /// Try using const constructors as much as possible!
 
@@ -17,11 +18,19 @@ void main() async {
   /// Initialize packages
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  if (Platform.isAndroid) {
+
+  /// Support high refresh rate on Android
+  if (!kIsWeb && Platform.isAndroid) {
     await FlutterDisplayMode.setHighRefreshRate();
   }
-  final Directory tmpDir = await getTemporaryDirectory();
-  await Hive.initFlutter(tmpDir.path);
+
+  /// Init Hive key/value store
+  if (kIsWeb) {
+    await Hive.initFlutter();
+  } else {
+    final Directory tmpDir = await getTemporaryDirectory();
+    await Hive.initFlutter(tmpDir.path);
+  }
   await Hive.openBox<dynamic>('prefs');
 
   runApp(
@@ -61,7 +70,7 @@ class MyApp extends ConsumerWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: const SkeletonScreen(),
+      home: const MapScreen(),
     );
   }
 }

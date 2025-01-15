@@ -3,11 +3,13 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "start": "concurrently --kill-others \"sleep 1 && php artisan serve --port=${PORT:-8000}\" \"npm run dev\""
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
+        "concurrently": "^9.1.0",
         "daisyui": "^4.12.11",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.47",
