@@ -1,35 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\DTOs;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Spatie\LaravelData\Data;
 
-class Address extends Model
+class AddressData extends Data
 {
-    use HasFactory;
+    public function __construct(
+        public ?string $country = null,
+        public ?string $state = null,
+        public ?string $city = null,
+        public ?string $post_code = null,
+        public ?string $street = null,
+    ) {}
 
-    /**
-     * The attributes that should be mass assignable.
-     */
-    protected $fillable = [
-        'country',
-        'state',
-        'city',
-        'post_code',
-        'street',
-    ];
-
-    #region Relations
-
-    public function addressable(): MorphTo
+    public function asString(): string
     {
-        return $this->morphTo();
+        return ($this->street ? $this->street . ', ' : '') . ($this->post_code ?? '') . ' ' . ($this->city ?? '');
     }
-
-    #endregion Relations
-    #region Helpers
 
     /**
      * Returns the address string based on the given format.
@@ -46,7 +34,9 @@ class Address extends Model
         foreach (str_split($format) as $char) {
             switch ($char) {
                 case 'C':
-                    $result .= trans("enums/country.{$this->country}");
+                    if ($this->country) {
+                        $result .= trans("enums/country.{$this->country}");
+                    }
                     break;
                 case 'S':
                     $result .= $this->state;
@@ -65,8 +55,12 @@ class Address extends Model
             }
         }
 
+        // Trim and remove trailing ',' if given. This is a workaround for issues with the country.
+        $result = trim($result);
+        if (substr($result, -1) === ',') {
+            $result = substr($result, 0, -1);
+        }
+
         return $result;
     }
-
-    #endregion Helpers
 }

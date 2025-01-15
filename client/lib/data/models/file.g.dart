@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: always_specify_types
-
 part of 'file.dart';
 
 // **************************************************************************
@@ -9,7 +7,7 @@ part of 'file.dart';
 // **************************************************************************
 
 File _$FileFromJson(Map<String, dynamic> json) => File(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       fileableType: json['fileable_type'] as String?,
       fileableId: (json['fileable_id'] as num?)?.toInt(),
       fileable: json['fileable'] == null
