@@ -13,15 +13,15 @@ class Location extends Model
 {
     use HasFactory, IsApiModel;
 
-    # region Relations
+    #region Relations
 
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    # endregion Relations
-    # region Factories
+    #endregion Relations
+    #region Factories
 
     public static function fromOverpassData(OverpassData $data, bool $persist = false): self
     {
@@ -41,8 +41,8 @@ class Location extends Model
         return $location;
     }
 
-    # endregion Factories
-    # region Api
+    #endregion Factories
+    #region Api
 
     public function scopeFilter(Builder $query, string $column = '', mixed $value = null): void
     {
@@ -56,5 +56,5 @@ class Location extends Model
         }
     }
 
-    # endregion Api
+    #endregion Api
 }
