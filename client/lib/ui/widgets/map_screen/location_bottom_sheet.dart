@@ -28,7 +28,7 @@ class LocationBottomSheet extends ConsumerWidget {
       controller: locationSheetController,
       expand: true,
       snap: true,
-      snapSizes: const <double>[0, .85, 1],
+      snapSizes: const <double>[0, .25, .93, 1],
       shouldCloseOnMinExtent: false,
       initialChildSize: 0,
       minChildSize: 0,
@@ -80,6 +80,8 @@ class LocationBottomSheet extends ConsumerWidget {
     }
 
     return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       children: <Widget>[
         Row(
@@ -93,7 +95,7 @@ class LocationBottomSheet extends ConsumerWidget {
                 fit: BoxFit.scaleDown,
                 child: Text(
                   location.name!,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ),
@@ -120,7 +122,7 @@ class LocationBottomSheet extends ConsumerWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
 
         // Tabs
         ConstrainedBox(
@@ -136,7 +138,7 @@ class LocationBottomSheet extends ConsumerWidget {
               children: <Widget>[
                 const TabBar(
                   tabAlignment: TabAlignment.start,
-                  labelPadding: EdgeInsets.all(16),
+                  labelPadding: EdgeInsets.all(12),
                   isScrollable: true,
                   tabs: <Widget>[
                     Text('ÜBERSICHT'),

@@ -212,7 +212,7 @@ class SearchBottomSheet extends ConsumerWidget {
                                                 .controller!;
 
                                         locationSheetController.animateTo(
-                                          .85,
+                                          .93,
                                           duration:
                                               const Duration(milliseconds: 250),
                                           curve: Curves.linear,
