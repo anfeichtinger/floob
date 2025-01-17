@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:floob/states/bottom_sheet/location_bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
-import 'package:floob/states/bottom_sheet/bottom_sheet_controller.dart';
+import 'package:floob/states/bottom_sheet/search_bottom_sheet_controller.dart';
 import 'package:floob/states/map/map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -42,9 +43,16 @@ class MapWidgetState extends ConsumerState<MapWidget> {
           controller.move(point, 19,
               offset: Offset(0, MediaQuery.of(context).size.height / -3));
 
+          // To controll the bottom sheet size
+          final DraggableScrollableController locationSheetController =
+              ref.read(locationBottomSheetControllerProvider).controller!;
+          locationSheetController.animateTo(0,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.linear);
+
           // Extend bottom sheet to show results
           final DraggableScrollableController bottomSheetController =
-              ref.read(bottomSheetControllerProvider).controller!;
+              ref.read(searchBottomSheetControllerProvider).controller!;
 
           bottomSheetController.animateTo(.70,
               duration: const Duration(milliseconds: 250),
