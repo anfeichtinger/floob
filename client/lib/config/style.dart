@@ -69,6 +69,9 @@ class Style {
       selectedItemColor: primary500,
       elevation: 2,
     ),
+    tabBarTheme: ThemeData.dark().tabBarTheme.copyWith(
+          dividerColor: gray300.withAlpha(80),
+        ),
     // Note: If different components are used you might need to provide specific styles for them
   );
 
@@ -120,6 +123,9 @@ class Style {
       selectedItemColor: primary400,
       elevation: 2,
     ),
+    tabBarTheme: ThemeData.dark().tabBarTheme.copyWith(
+          dividerColor: text100.withAlpha(80),
+        ),
     // Note: If different components are used you might need to provide specific styles for them
   );
 }

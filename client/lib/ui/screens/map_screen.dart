@@ -1,4 +1,5 @@
-import 'package:floob/ui/widgets/map_screen/bottom_sheet_widget.dart';
+import 'package:floob/ui/widgets/map_screen/location_bottom_sheet.dart';
+import 'package:floob/ui/widgets/map_screen/search_bottom_sheet.dart';
 import 'package:floob/ui/widgets/map_screen/flutter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
@@ -16,7 +17,8 @@ class MapScreen extends ConsumerWidget {
       body: const Stack(
         children: <Widget>[
           MapWidget(),
-          BottomSheetWidget(),
+          SearchBottomSheet(),
+          LocationBottomSheet(),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

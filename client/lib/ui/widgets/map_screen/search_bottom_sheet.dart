@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:floob/data/models/location.dart';
-import 'package:floob/states/bottom_sheet/bottom_sheet_controller.dart';
+import 'package:floob/states/bottom_sheet/current_location_controller.dart';
+import 'package:floob/states/bottom_sheet/location_bottom_sheet_controller.dart';
+import 'package:floob/states/bottom_sheet/search_bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/location_list_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
 import 'package:floob/states/controllers/location_controller.dart';
@@ -17,14 +19,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:unicons/unicons.dart';
 
-class BottomSheetWidget extends ConsumerWidget {
-  const BottomSheetWidget({super.key});
+class SearchBottomSheet extends ConsumerWidget {
+  const SearchBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // To controll the bottom sheet size
-    final DraggableScrollableController controller =
-        ref.read(bottomSheetControllerProvider).controller!;
+    // To control this bottom sheet
+    final DraggableScrollableController searchSheetController =
+        ref.read(searchBottomSheetControllerProvider).controller!;
 
     // To controll the search text field
     final TextEditingController searchController =
@@ -38,7 +40,7 @@ class BottomSheetWidget extends ConsumerWidget {
     final List<Location> results = ref.watch(locationListProvider).results;
 
     return DraggableScrollableSheet(
-      controller: controller,
+      controller: searchSheetController,
       expand: true,
       snap: true,
       snapSizes: const <double>[.15, .7, 1],
@@ -190,7 +192,32 @@ class BottomSheetWidget extends ConsumerWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     TextButton(
-                                      onPressed: () => print('Todo details'),
+                                      onPressed: () {
+                                        searchSheetController.animateTo(
+                                          0.000000001,
+                                          duration:
+                                              const Duration(milliseconds: 250),
+                                          curve: Curves.linear,
+                                        );
+
+                                        ref
+                                            .read(currentLocationProvider)
+                                            .update(results[index]);
+
+                                        // To control the location bottom sheet
+                                        final DraggableScrollableController
+                                            locationSheetController = ref
+                                                .read(
+                                                    locationBottomSheetControllerProvider)
+                                                .controller!;
+
+                                        locationSheetController.animateTo(
+                                          .85,
+                                          duration:
+                                              const Duration(milliseconds: 250),
+                                          curve: Curves.linear,
+                                        );
+                                      },
                                       child: const Text('Details anzeigen'),
                                     ),
                                     TextButton(
