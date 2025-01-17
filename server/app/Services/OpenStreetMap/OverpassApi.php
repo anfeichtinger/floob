@@ -4,6 +4,7 @@ namespace App\Services\OpenStreetMap;
 
 use App\Services\OpenStreetMap\Models\LatLng;
 use App\Services\OpenStreetMap\Models\OverpassResponse;
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 class OverpassApi
@@ -35,9 +36,13 @@ class OverpassApi
         out body;
         ";
 
-        $response = Http::timeout(10)->asForm()->post($url, ['data' => $query]);
+        try {
+            $response = Http::timeout(10)->asForm()->post($url, ['data' => $query]);
+        } catch (Exception $e) {
+            return null;
+        }
 
-        if ($response->successful()) {
+        if ($response?->successful() ?? false) {
             return new OverpassResponse(
                 point: $point,
                 elements: $response->json('elements') ?? [],
