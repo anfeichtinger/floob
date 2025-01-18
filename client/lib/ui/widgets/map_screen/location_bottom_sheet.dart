@@ -1,6 +1,7 @@
 import 'package:floob/data/models/location.dart';
 import 'package:floob/states/bottom_sheet/current_location_controller.dart';
 import 'package:floob/states/bottom_sheet/location_bottom_sheet_controller.dart';
+import 'package:floob/states/bottom_sheet/location_tab_controller.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_accessibility_tab.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_media_tab.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_overview_tab.dart';
@@ -12,11 +13,23 @@ import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unicons/unicons.dart';
 
-class LocationBottomSheet extends ConsumerWidget {
+class LocationBottomSheet extends ConsumerStatefulWidget {
   const LocationBottomSheet({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  LocationTabViewState createState() => LocationTabViewState();
+}
+
+class LocationTabViewState extends ConsumerState<LocationBottomSheet>
+    with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(locationTabControllerProvider).init(this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // To controll the bottom sheet size
     final DraggableScrollableController locationSheetController =
         ref.read(locationBottomSheetControllerProvider).controller!;
@@ -79,6 +92,9 @@ class LocationBottomSheet extends ConsumerWidget {
       return const Text('No location given...');
     }
 
+    final TabController tabController =
+        ref.watch(locationTabControllerProvider).controller!;
+
     return ListView(
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
@@ -136,11 +152,12 @@ class LocationBottomSheet extends ConsumerWidget {
             length: 4,
             child: Column(
               children: <Widget>[
-                const TabBar(
+                TabBar(
+                  controller: tabController,
                   tabAlignment: TabAlignment.start,
-                  labelPadding: EdgeInsets.all(12),
+                  labelPadding: const EdgeInsets.all(12),
                   isScrollable: true,
-                  tabs: <Widget>[
+                  tabs: const <Widget>[
                     Text('ÜBERSICHT'),
                     Text('MERKMALE'),
                     Text('ERFAHRUNGEN'),
@@ -149,6 +166,7 @@ class LocationBottomSheet extends ConsumerWidget {
                 ),
                 Expanded(
                   child: TabBarView(
+                    controller: tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
                       LocationOverviewTab(location: location),
