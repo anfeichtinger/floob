@@ -39,5 +39,22 @@
   "settings_theme_light": "Light",
   "settings_theme_dark": "Dark",
   "settings_theme_system": "System",
-  "settings_save": "Save"
+  "settings_save": "Save",
+
+  "location_overview_title": "OVERVIEW",
+
+  "location_accessibility_title": "FEATURES",
+
+  "location_ratings_title": "RATINGS",
+  "location_ratings_no_ratings": "No ratings available yet",
+  "location_ratings_summary": "Summary",
+  "location_ratings_add_rating": "Want to share your experience?",
+  "location_ratings_from_others": "Reports from others",
+  "location_ratings_from_others_more": "More",
+
+  "location_media_title": "MEDIA",
+  "location_media_no_media": "No media available",
+  "location_media_videos": "Videos",
+  "location_media_images": "Images",
+  "location_media_audio": "Audios"
 }

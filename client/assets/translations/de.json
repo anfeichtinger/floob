@@ -39,5 +39,22 @@
   "settings_theme_light": "Hell",
   "settings_theme_dark": "Dunkel",
   "settings_theme_system": "System",
-  "settings_save": "Speichern"
+  "settings_save": "Speichern",
+
+  "location_overview_title": "ÜBERSICHT",
+
+  "location_accessibility_title": "MERKMALE",
+
+  "location_ratings_title": "ERFAHRUNGEN",
+  "location_ratings_no_ratings": "Noch keine Erfahrungen vorhanden",
+  "location_ratings_summary": "Zusammenfassung",
+  "location_ratings_add_rating": "Du möchtest deine Erfahrung teilen?",
+  "location_ratings_from_others": "Berichte von anderen Personen",
+  "location_ratings_from_others_more": "Mehr",
+
+  "location_media_title": "MEDIEN",
+  "location_media_no_media": "Keine Medien vorhanden",
+  "location_media_videos": "Videos",
+  "location_media_images": "Bilder",
+  "location_media_audio": "Audios"
 }
