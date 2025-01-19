@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/data/models/location.dart';
 import 'package:floob/states/bottom_sheet/current_location_controller.dart';
 import 'package:floob/states/bottom_sheet/location_bottom_sheet_controller.dart';
@@ -161,11 +162,11 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
                   tabAlignment: TabAlignment.start,
                   labelPadding: const EdgeInsets.all(12),
                   isScrollable: true,
-                  tabs: const <Widget>[
-                    Text('ÜBERSICHT'),
-                    Text('MERKMALE'),
-                    Text('ERFAHRUNGEN'),
-                    Text('MEDIEN'),
+                  tabs: <Widget>[
+                    Text(tr('location_overview_title')),
+                    Text(tr('location_accessibility_title')),
+                    Text(tr('location_ratings_title')),
+                    Text(tr('location_media_title')),
                   ],
                 ),
                 Expanded(

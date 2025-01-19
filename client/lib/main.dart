@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:floob/data/enums/de_messages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
@@ -8,6 +9,7 @@ import 'package:floob/config/style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'states/theme_mode_state.dart';
 import 'ui/screens/map_screen.dart';
@@ -18,6 +20,7 @@ void main() async {
   /// Initialize packages
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  timeago.setLocaleMessages('de', DeMessages());
 
   /// Support high refresh rate on Android
   if (!kIsWeb && Platform.isAndroid) {
