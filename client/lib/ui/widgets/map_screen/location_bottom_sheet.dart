@@ -2,6 +2,7 @@ import 'package:floob/data/models/location.dart';
 import 'package:floob/states/bottom_sheet/current_location_controller.dart';
 import 'package:floob/states/bottom_sheet/location_bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/location_tab_controller.dart';
+import 'package:floob/states/map/bottom_navigation_bar_controller.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_accessibility_tab.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_media_tab.dart';
 import 'package:floob/ui/widgets/map_screen/location_tabs/location_overview_tab.dart';
@@ -92,8 +93,8 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
       return const Text('No location given...');
     }
 
-    final TabController tabController =
-        ref.watch(locationTabControllerProvider).controller!;
+    final LocationTabState tabControllerProvider =
+        ref.watch(locationTabControllerProvider);
 
     return ListView(
       physics: const NeverScrollableScrollPhysics(),
@@ -153,7 +154,10 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
             child: Column(
               children: <Widget>[
                 TabBar(
-                  controller: tabController,
+                  controller: tabControllerProvider.controller!,
+                  onTap: (int index) {
+                    tabControllerProvider.update(context, index);
+                  },
                   tabAlignment: TabAlignment.start,
                   labelPadding: const EdgeInsets.all(12),
                   isScrollable: true,
@@ -166,7 +170,7 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
                 ),
                 Expanded(
                   child: TabBarView(
-                    controller: tabController,
+                    controller: tabControllerProvider.controller!,
                     physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
                       LocationOverviewTab(location: location),

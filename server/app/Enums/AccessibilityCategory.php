@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use App\Traits\EnumEnhancements;
 
-enum AccessbilityCategory: string
+enum AccessibilityCategory: string
 {
     use EnumEnhancements;
 
@@ -21,7 +21,7 @@ enum AccessbilityCategory: string
     public static function withEntries(): array
     {
         $result = [];
-        foreach (AccessbilityEntry::cases() as $entry) {
+        foreach (AccessibilityEntry::cases() as $entry) {
             $result[$entry->toCategory()?->value ?? 'unknown'][] = $entry->value;
         }
 

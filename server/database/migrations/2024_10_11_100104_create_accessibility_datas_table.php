@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('category'); // AccessbilityCategory::class
-            $table->string('entry'); // AccessbilityEntry::class
+            $table->string('category'); // AccessibilityCategory::class
+            $table->string('entry'); // AccessibilityEntry::class
             $table->boolean('value');
             $table->timestamps();
 

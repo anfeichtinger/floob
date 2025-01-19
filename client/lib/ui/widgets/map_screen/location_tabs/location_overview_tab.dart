@@ -77,38 +77,60 @@ class LocationOverviewTab extends ConsumerWidget {
             itemBuilder: (BuildContext context, int index) {
               Color color = Colors.green;
               IconData icon = UniconsLine.check_circle;
+              String title = 'Erfüllt';
               switch (index % 4) {
                 case 1:
                   color = Colors.red;
                   icon = UniconsLine.times_circle;
+                  title = 'Nicht Erfüllt';
                   break;
                 case 2:
                   color = Colors.amber;
                   icon = UniconsLine.exclamation_circle;
+                  title = 'Unzuverlässig';
                   break;
                 case 3:
                   color = Colors.grey;
                   icon = UniconsLine.question_circle;
+                  title = 'Unbekannt';
                   break;
               }
 
               return Card(
                 color: Theme.of(context).colorScheme.surface,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Icon(
-                      icon,
-                      size: 28,
-                      color: color,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, left: 12),
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
-                    const SizedBox(width: 16),
-                    Text(
-                      Random().nextInt(21).toString(), // Todo real values
-                      style:
-                          Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                color: color,
-                              ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            icon,
+                            size: 28,
+                            color: color,
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            Random().nextInt(21).toString(), // Todo real values
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
+                                  color: color,
+                                ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -116,7 +138,7 @@ class LocationOverviewTab extends ConsumerWidget {
             }),
         const SizedBox(height: 16),
         _buildViewAllButton(context, ref, onPressed: () {
-          ref.read(locationTabControllerProvider).controller?.animateTo(1);
+          ref.read(locationTabControllerProvider).update(context, 1);
         }),
         const SizedBox(height: 36),
         // ===============================
@@ -183,7 +205,7 @@ class LocationOverviewTab extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         _buildViewAllButton(context, ref, onPressed: () {
-          ref.read(locationTabControllerProvider).controller?.animateTo(2);
+          ref.read(locationTabControllerProvider).update(context, 2);
         }),
         const SizedBox(height: 36),
         // ===============================
@@ -215,7 +237,7 @@ class LocationOverviewTab extends ConsumerWidget {
             }),
         const SizedBox(height: 16),
         _buildViewAllButton(context, ref, onPressed: () {
-          ref.read(locationTabControllerProvider).controller?.animateTo(3);
+          ref.read(locationTabControllerProvider).update(context, 3);
         }),
         const SizedBox(height: 256),
       ],
