@@ -3,7 +3,7 @@ import 'package:floob/data/models/location.dart';
 import 'package:floob/data/models/review.dart';
 import 'package:floob/utils/floob_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating/flutter_rating.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -136,11 +136,16 @@ class _LocationRatingsTabState extends ConsumerState<LocationRatingsTab> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: StarRating(
+                    child: RatingBarIndicator(
                       rating: averageRating,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      color: Colors.amber,
-                      borderColor: Colors.amber,
+                      itemSize: 30.0,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        );
+                      },
                     ),
                   ),
                   Text('($totalRatings)'),
@@ -208,13 +213,17 @@ class _LocationRatingsTabState extends ConsumerState<LocationRatingsTab> {
             const SizedBox(width: 36),
 
             // Star Rating
-            StarRating(
-              rating: _userRating,
-              mainAxisAlignment: MainAxisAlignment.center,
-              size: 48,
-              color: Colors.amber,
-              borderColor: Colors.grey,
-              onRatingChanged: (double rating) {
+            RatingBar.builder(
+              initialRating: _userRating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (BuildContext context, _) => const Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (double rating) {
                 setState(() {
                   _userRating = rating;
                 });

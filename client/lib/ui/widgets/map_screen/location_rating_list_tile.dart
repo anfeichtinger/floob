@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/data/models/review.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating/flutter_rating.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class LocationRatingListTile extends StatelessWidget {
@@ -39,11 +39,14 @@ class LocationRatingListTile extends StatelessWidget {
                     locale: context.locale.toString()),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              StarRating(
+              RatingBarIndicator(
                 rating: review.score?.toDouble() ?? 0,
-                color: Colors.amber,
-                borderColor: Colors.amber,
-                mainAxisAlignment: MainAxisAlignment.start,
+                itemSize: 20.0,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (BuildContext context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
               ),
             ],
           ),
