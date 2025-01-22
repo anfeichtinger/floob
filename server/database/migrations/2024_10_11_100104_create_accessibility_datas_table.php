@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accessibility_datas', function (Blueprint $table) {
+        Schema::create('accessibility_data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('category'); // AccessbilityCategory::class
-            $table->string('entry'); // AccessbilityEntry::class
+            $table->string('category'); // AccessibilityCategory::class
+            $table->string('entry'); // AccessibilityEntry::class
             $table->boolean('value');
             $table->timestamps();
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accessibility_datas');
+        Schema::dropIfExists('accessibility_data');
     }
 };

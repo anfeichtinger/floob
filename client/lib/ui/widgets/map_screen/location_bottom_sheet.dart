@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unicons/unicons.dart';
 
 class LocationBottomSheet extends ConsumerStatefulWidget {
   const LocationBottomSheet({super.key});
@@ -34,6 +33,13 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
     // To controll the bottom sheet size
     final DraggableScrollableController locationSheetController =
         ref.read(locationBottomSheetControllerProvider).controller!;
+
+    // Listener to reset the tab controller on close
+    locationSheetController.addListener(() {
+      if (locationSheetController.pixels <= 2) {
+        ref.read(locationTabControllerProvider).update(context, 0);
+      }
+    });
 
     // The location to show
     final Location? location = ref.watch(currentLocationProvider).location;
@@ -93,8 +99,8 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
       return const Text('No location given...');
     }
 
-    final TabController tabController =
-        ref.watch(locationTabControllerProvider).controller!;
+    final LocationTabState tabControllerProvider =
+        ref.watch(locationTabControllerProvider);
 
     return ListView(
       physics: const NeverScrollableScrollPhysics(),
@@ -116,27 +122,27 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
                 ),
               ),
             ),
-            const SizedBox(width: 24),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                UniconsLine.location_arrow,
-                color: Colors.black,
-                size: 30.0,
-              ),
-              style: ButtonStyle(
-                backgroundColor:
-                    WidgetStateProperty.all<Color>(const Color(0xFFE0E0E0)),
-                padding: WidgetStateProperty.all<EdgeInsets>(
-                  const EdgeInsets.all(10.0),
-                ),
-                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
-            ),
+            // const SizedBox(width: 24),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(
+            //     UniconsLine.location_arrow,
+            //     color: Colors.black,
+            //     size: 30.0,
+            //   ),
+            //   style: ButtonStyle(
+            //     backgroundColor:
+            //         WidgetStateProperty.all<Color>(const Color(0xFFE0E0E0)),
+            //     padding: WidgetStateProperty.all<EdgeInsets>(
+            //       const EdgeInsets.all(10.0),
+            //     ),
+            //     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            //       RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(10.0),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         const SizedBox(height: 4),
@@ -154,7 +160,10 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
             child: Column(
               children: <Widget>[
                 TabBar(
-                  controller: tabController,
+                  controller: tabControllerProvider.controller!,
+                  onTap: (int index) {
+                    tabControllerProvider.update(context, index);
+                  },
                   tabAlignment: TabAlignment.start,
                   labelPadding: const EdgeInsets.all(12),
                   isScrollable: true,
@@ -167,8 +176,8 @@ class LocationTabViewState extends ConsumerState<LocationBottomSheet>
                 ),
                 Expanded(
                   child: TabBarView(
-                    controller: tabController,
-                    physics: const NeverScrollableScrollPhysics(),
+                    controller: tabControllerProvider.controller!,
+                    physics: const RangeMaintainingScrollPhysics(),
                     children: <Widget>[
                       LocationOverviewTab(location: location),
                       LocationAccessibilityTab(location: location),
