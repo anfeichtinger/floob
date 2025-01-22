@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('accessibility_data_id')->references('id')->on('accessibility_datas');
+            $table->foreign('accessibility_data_id')->references('id')->on('accessibility_data');
         });
     }
 

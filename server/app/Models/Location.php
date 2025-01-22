@@ -22,6 +22,11 @@ class Location extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function accessibilityDatas(): HasMany
+    {
+        return $this->hasMany(AccessibilityData::class);
+    }
+
     #endregion Relations
     #region Factories
 

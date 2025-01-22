@@ -39,5 +39,61 @@
   "settings_theme_light": "Hell",
   "settings_theme_dark": "Dunkel",
   "settings_theme_system": "System",
-  "settings_save": "Speichern"
+  "settings_save": "Speichern",
+
+  "location_overview_title": "ÜBERSICHT",
+
+  "location_accessibility_title": "MERKMALE",
+
+  "location_ratings_title": "ERFAHRUNGEN",
+  "location_ratings_no_ratings": "Noch keine Erfahrungen vorhanden",
+  "location_ratings_summary": "Zusammenfassung",
+  "location_ratings_add_rating": "Du möchtest deine Erfahrung teilen?",
+  "location_ratings_from_others": "Berichte von anderen Personen",
+  "location_ratings_from_others_more": "Mehr",
+
+  "location_media_title": "MEDIEN",
+  "location_media_no_media": "Keine Medien vorhanden",
+  "location_media_videos": "Videos",
+  "location_media_images": "Bilder",
+  "location_media_audio": "Audios",
+
+  "accessibility_category_paths": "Wege",
+  "accessibility_category_doors": "Türen",
+  "accessibility_category_stairs": "Treppen & Aufzüge",
+  "accessibility_category_restrooms": "WC",
+  "accessibility_category_mobility": "Mobilität",
+
+  "accessibility_entry_paths_well_lit": "Gut ausgeleuchtet",
+  "accessibility_entry_paths_no_steps_or_angles": "Keine Stufen, Schwellen oder große Steigungen",
+  "accessibility_entry_paths_has_ramp": "Rampe vorhanden",
+  "accessibility_entry_paths_ramp_fits_two_wheelchairs": "Breite für 2 Rollstühle",
+  "accessibility_entry_paths_ramp_has_handle": "Hat einen Handlauf",
+  "accessibility_entry_paths_hard_flooring": "Hat einen Handlauf",
+  "accessibility_entry_paths_visual_guidesystem": "Visuelles Leitsystem (Text, Farben, Symbole)",
+  "accessibility_entry_paths_haptic_guidesystem": "Ertastbares Leitsystem für Menschen mit Sehbehinderung",
+  "accessibility_entry_paths_fits_two_wheelchairs": "Genug Platz für 2 Rollstühle nebeneinander",
+
+  "accessibility_entry_doors_doorstep_height": "Türschwelle maximal zwei Finger hoch",
+  "accessibility_entry_doors_no_turning_handles": "Keine Drehgriffe",
+  "accessibility_entry_doors_automatic_main_entrance": "Haupteingang öffnet automatisch",
+  "accessibility_entry_doors_extra_entrance": "Extra Eingang für Menschen mit Behinderung",
+
+  "accessibility_entry_stairs_have_handle": "Treppen mit Handläufen",
+  "accessibility_entry_stairs_have_contrast_markings": "Kontrastreiche Markierung der ersten und letzten Stufe",
+  "accessibility_entry_stairs_no_metal_mesh": "Keine Metallgittertreppe",
+  "accessibility_entry_elevators_free_space_in_front": "Freie Bewegungsfläche vor Aufzügen",
+  "accessibility_entry_elevators_mirror_in_back": "Spiegel an der Aufzugrückseite",
+  "accessibility_entry_elevators_buttons_reachable": "Aufzugbedienung ist auch im Sitzen erreichbar",
+  "accessibility_entry_elevators_buttons_braille": "Aufzugbedienung mit Brailleschrift",
+  "accessibility_entry_elevators_acoustic_feedback": "Akustische Aufzugansage",
+
+  "accessibility_entry_restrooms_accessible": "Behindertengerechtes WC vorhanden",
+  "accessibility_entry_restrooms_have_handles": "Haltegriffe vorhanden",
+  "accessibility_entry_restrooms_have_alarm": "Notfallklingel vorhanden",
+  "accessibility_entry_restrooms_soap_one_handed": "Seifenspender mit einer Hand bedienbar",
+
+  "accessibility_entry_mobility_close_public_trans": "Wenige Meter bis zur öffentlichen Haltestelle",
+  "accessibility_entry_mobility_own_accessible_parking": "Hauseigene barrierefreie Parkplätze",
+  "accessibility_entry_mobility_public_accessible_parking": "Öffentliche barrierefreie Parkplätze wenige Meter entfernt"
 }

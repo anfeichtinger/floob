@@ -1,5 +1,4 @@
 import 'package:floob/data/models/base_model.dart';
-import 'package:floob/data/models/review.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'location.g.dart';
@@ -17,11 +16,35 @@ class Location extends BaseModel {
   final Map<String, String>? openingTimes;
   @JsonKey(name: 'overpass_data')
   final Map<String, dynamic>? overpassData;
-  final List<Review>? reviews;
-  @JsonKey(name: 'review_count')
-  final int reviewCount;
-  @JsonKey(name: 'review_score')
-  final double reviewScore;
+  final Map<String, double>? reviews;
+  final Map<String, Map<String, bool?>?>? accessibility;
+
+  String get address {
+    if (overpassData?['address'] == null) {
+      return 'Keine Adresse gefunden...';
+    }
+
+    String result = '';
+
+    // Street
+    if (overpassData?['address']['street'] != null) {
+      result += overpassData!['address']['street'] as String;
+    }
+
+    // Post Code
+    if (overpassData?['address']['post_code'] != null) {
+      result += (result.isEmpty ? '' : ', ') +
+          (overpassData!['address']['post_code'] as String);
+    }
+
+    // City
+    if (overpassData?['address']['city'] != null) {
+      result += (result.isEmpty ? '' : ' ') +
+          (overpassData!['address']['city'] as String);
+    }
+
+    return result;
+  }
 
   Location({
     super.id,
@@ -33,8 +56,7 @@ class Location extends BaseModel {
     this.openingTimes,
     this.overpassData,
     this.reviews,
-    this.reviewCount = 0,
-    this.reviewScore = 0,
+    this.accessibility,
     super.createdAt,
     super.updatedAt,
   });
@@ -62,8 +84,7 @@ class Location extends BaseModel {
       openingTimes: $openingTimes,
       overpassData: $overpassData,
       reviews: $reviews,
-      reviewCount: $reviewCount,
-      reviewScore: $reviewScore,
+      accessibility: $accessibility,
     }''';
   }
 }

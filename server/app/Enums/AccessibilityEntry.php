@@ -5,7 +5,7 @@ namespace App\Enums;
 use App\Traits\EnumEnhancements;
 use Illuminate\Support\Str;
 
-enum AccessbilityEntry: string
+enum AccessibilityEntry: string
 {
     use EnumEnhancements;
 
@@ -50,19 +50,19 @@ enum AccessbilityEntry: string
     /**
      * Get the category of a specific entry statically.
      */
-    public static function getCategory(null|string|self $entry): ?AccessbilityCategory
+    public static function getCategory(null|string|self $entry): ?AccessibilityCategory
     {
         $string = strtoupper($entry?->value ?? $entry);
         if (Str::startsWith($string, 'PATHS')) {
-            return AccessbilityCategory::PATHS;
+            return AccessibilityCategory::PATHS;
         } elseif (Str::startsWith($string, 'DOORS')) {
-            return AccessbilityCategory::DOORS;
+            return AccessibilityCategory::DOORS;
         } elseif (Str::startsWith($string, 'STAIRS') || Str::startsWith($string, 'ELEVATORS')) {
-            return AccessbilityCategory::STAIRS;
+            return AccessibilityCategory::STAIRS;
         } elseif (Str::startsWith($string, 'RESTROOMS')) {
-            return AccessbilityCategory::RESTROOMS;
+            return AccessibilityCategory::RESTROOMS;
         } elseif (Str::startsWith($string, 'MOBILITY')) {
-            return AccessbilityCategory::MOBILITY;
+            return AccessibilityCategory::MOBILITY;
         } else {
             return null;
         }
@@ -71,7 +71,7 @@ enum AccessbilityEntry: string
     /**
      * Get the category of the current entry.
      */
-    public function toCategory(): ?AccessbilityCategory
+    public function toCategory(): ?AccessibilityCategory
     {
         return self::getCategory($this);
     }

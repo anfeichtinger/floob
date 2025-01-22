@@ -39,5 +39,61 @@
   "settings_theme_light": "Light",
   "settings_theme_dark": "Dark",
   "settings_theme_system": "System",
-  "settings_save": "Save"
+  "settings_save": "Save",
+
+  "location_overview_title": "OVERVIEW",
+
+  "location_accessibility_title": "FEATURES",
+
+  "location_ratings_title": "RATINGS",
+  "location_ratings_no_ratings": "No ratings available yet",
+  "location_ratings_summary": "Summary",
+  "location_ratings_add_rating": "Want to share your experience?",
+  "location_ratings_from_others": "Reports from others",
+  "location_ratings_from_others_more": "More",
+
+  "location_media_title": "MEDIA",
+  "location_media_no_media": "No media available",
+  "location_media_videos": "Videos",
+  "location_media_images": "Images",
+  "location_media_audio": "Audios",
+
+  "accessibility_category_paths": "Paths",
+  "accessibility_category_doors": "Doors",
+  "accessibility_category_stairs": "Stairs & Elevators",
+  "accessibility_category_restrooms": "Toilets",
+  "accessibility_category_mobility": "Mobility",
+
+  "accessibility_entry_paths_well_lit": "Well illuminated",
+  "accessibility_entry_paths_no_steps_or_angles": "No steps, thresholds or large inclines",
+  "accessibility_entry_paths_has_ramp": "Ramp available",
+  "accessibility_entry_paths_ramp_fits_two_wheelchairs": "Width for 2 wheelchairs",
+  "accessibility_entry_paths_ramp_has_handle": "Has a handrail",
+  "accessibility_entry_paths_hard_flooring": "Has a handrail",
+  "accessibility_entry_paths_visual_guidesystem": "Visual guidance system (text, colours, symbols)",
+  "accessibility_entry_paths_haptic_guidesystem": "Tactile guidance system for people with visual impairments",
+  "accessibility_entry_paths_fits_two_wheelchairs": "Enough space for 2 wheelchairs next to each other",
+
+  "accessibility_entry_doors_doorstep_height": "Door threshold maximum two fingers high",
+  "accessibility_entry_doors_no_turning_handles": "No turning handles",
+  "accessibility_entry_doors_automatic_main_entrance": "Main entrance opens automatically",
+  "accessibility_entry_doors_extra_entrance": "Extra entrance for people with disabilities",
+
+  "accessibility_entry_stairs_have_handle": "Stairs with handrails",
+  "accessibility_entry_stairs_have_contrast_markings": "High-contrast marking of the first and last step",
+  "accessibility_entry_stairs_no_metal_mesh": "No metal mesh staircase",
+  "accessibility_entry_elevators_free_space_in_front": "Free movement space in front of lifts",
+  "accessibility_entry_elevators_mirror_in_back": "Mirror on the back of the lift",
+  "accessibility_entry_elevators_buttons_reachable": "Lift controls can also be reached while seated",
+  "accessibility_entry_elevators_buttons_braille": "Lift operation with Braille",
+  "accessibility_entry_elevators_acoustic_feedback": "Acoustic lift announcement",
+
+  "accessibility_entry_restrooms_accessible": "Disabled WC available",
+  "accessibility_entry_restrooms_have_handles": "Handrails available",
+  "accessibility_entry_restrooms_have_alarm": "Emergency bell available",
+  "accessibility_entry_restrooms_soap_one_handed": "Soap dispenser can be operated with one hand",
+
+  "accessibility_entry_mobility_close_public_trans": "A few metres to the public bus stop",
+  "accessibility_entry_mobility_own_accessible_parking": "In-house barrier-free car park",
+  "accessibility_entry_mobility_public_accessible_parking": "Public barrier-free parking spaces just a few metres away"
 }

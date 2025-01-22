@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\LocationController;
+use App\Http\Controllers\Api\v1\ReviewController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,11 @@ Route::controller(LocationController::class)->prefix('/locations')->group(functi
     Route::get('/paginate', 'paginateLocations');
     Route::get('/latlng', 'getLocationsByLatLng');
     Route::get('/{id}', 'getLocation');
+});
+#endregion Locations
+
+#region Locations
+Route::controller(ReviewController::class)->prefix('/reviews')->group(function () {
+    Route::get('/', 'getReviews');
 });
 #endregion Locations

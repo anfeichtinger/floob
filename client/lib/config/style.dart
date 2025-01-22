@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 class Style {
   const Style();
 
+  static const SnackBar notImplementedSnackbar = SnackBar(
+    backgroundColor: Colors.red,
+    content: Text('Funktion noch nicht verfügbar!'),
+  );
+
   // =================
   // | Border radius |
   // =================

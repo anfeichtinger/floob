@@ -1,3 +1,4 @@
+import 'package:floob/states/map/bottom_navigation_bar_controller.dart';
 import 'package:floob/ui/widgets/map_screen/location_bottom_sheet.dart';
 import 'package:floob/ui/widgets/map_screen/search_bottom_sheet.dart';
 import 'package:floob/ui/widgets/map_screen/flutter_map.dart';
@@ -10,6 +11,9 @@ class MapScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Widget? bottomNavigationBar =
+        ref.watch(bottomNavigationBarControllerProvider).widget;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -21,6 +25,7 @@ class MapScreen extends ConsumerWidget {
           LocationBottomSheet(),
         ],
       ),
+      bottomNavigationBar: bottomNavigationBar,
       backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
