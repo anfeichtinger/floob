@@ -168,7 +168,9 @@ class SearchBottomSheet extends ConsumerWidget {
                                       RatingBarIndicator(
                                         itemCount: 5,
                                         itemSize: 20,
-                                        rating: results[index].reviewScore,
+                                        rating:
+                                            results[index].reviews?['score'] ??
+                                                0,
                                         itemBuilder:
                                             (BuildContext context, _) =>
                                                 const Icon(
@@ -177,11 +179,11 @@ class SearchBottomSheet extends ConsumerWidget {
                                         ),
                                       ),
                                       Text(
-                                          '(${results[index].reviewScore.toStringAsFixed(1)})'),
+                                          '(${results[index].reviews?['score']?.toStringAsFixed(1) ?? '0.0'})'),
                                     ],
                                   ),
                                   Text(
-                                      'geteilte Erfahrungen: ${results[index].reviewCount}'),
+                                      'geteilte Erfahrungen: ${results[index].reviews?['count']}'),
                                 ],
                               ),
                               before: const SizedBox(height: 16),
@@ -221,7 +223,12 @@ class SearchBottomSheet extends ConsumerWidget {
                                       child: const Text('Details anzeigen'),
                                     ),
                                     TextButton(
-                                      onPressed: () => print('Todo entry'),
+                                      onPressed: () {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          Style.notImplementedSnackbar,
+                                        );
+                                      },
                                       child: const Text('Neuer Eintrag'),
                                     ),
                                   ],

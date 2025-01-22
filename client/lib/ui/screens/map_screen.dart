@@ -14,9 +14,6 @@ class MapScreen extends ConsumerWidget {
     Widget? bottomNavigationBar =
         ref.watch(bottomNavigationBarControllerProvider).widget;
 
-    print('Bottom Navigation Bar is:');
-    print(bottomNavigationBar);
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,

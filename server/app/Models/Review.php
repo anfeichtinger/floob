@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\IsApiModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
-    use HasFactory;
+    use HasFactory, IsApiModel;
 
     #region Relations
 
@@ -23,4 +25,19 @@ class Review extends Model
     }
 
     #endregion Relations
+    #region Api
+
+    public function scopeFilter(Builder $query, string $column = '', mixed $value = null): void
+    {
+        switch ($column) {
+            case 'ids':
+                $query->whereIn('id', $value);
+                break;
+            default:
+                $query->where($column, $value);
+                break;
+        }
+    }
+
+    #endregion Api
 }

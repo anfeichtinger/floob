@@ -17,11 +17,16 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
         (k, e) => MapEntry(k, e as String),
       ),
       overpassData: json['overpass_data'] as Map<String, dynamic>?,
-      reviews: (json['reviews'] as List<dynamic>?)
-          ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      reviewCount: (json['review_count'] as num?)?.toInt() ?? 0,
-      reviewScore: (json['review_score'] as num?)?.toDouble() ?? 0,
+      reviews: (json['reviews'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      accessibility: (json['accessibility'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+            k,
+            (e as Map<String, dynamic>?)?.map(
+              (k, e) => MapEntry(k, e as bool?),
+            )),
+      ),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -42,6 +47,5 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'opening_times': instance.openingTimes,
       'overpass_data': instance.overpassData,
       'reviews': instance.reviews,
-      'review_count': instance.reviewCount,
-      'review_score': instance.reviewScore,
+      'accessibility': instance.accessibility,
     };

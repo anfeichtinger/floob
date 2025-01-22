@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/data/models/file.dart';
 import 'package:floob/data/models/location.dart';
+import 'package:floob/ui/widgets/empty_state.dart';
 import 'package:floob/utils/floob_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:unicons/unicons.dart';
 
 class LocationMediaTab extends ConsumerStatefulWidget {
   const LocationMediaTab({required this.location, super.key});
@@ -14,10 +16,10 @@ class LocationMediaTab extends ConsumerStatefulWidget {
   final Location location;
 
   @override
-  _LocationMediaTabState createState() => _LocationMediaTabState();
+  LocationMediaTabState createState() => LocationMediaTabState();
 }
 
-class _LocationMediaTabState extends ConsumerState<LocationMediaTab> {
+class LocationMediaTabState extends ConsumerState<LocationMediaTab> {
   // TODO: Adjust this function for use with the API, use it when ready
   // ?: Move this function to the controller
   Future<List<File>> _loadFiles() async {
@@ -36,16 +38,26 @@ class _LocationMediaTabState extends ConsumerState<LocationMediaTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 24),
-        _buildVideosSection(context),
-        const SizedBox(height: 24),
-        _buildImagesSection(context),
-        const SizedBox(height: 24),
-        _buildAudioSection(context),
+        SizedBox(height: 36),
+        Center(
+          child: EmptyState(
+            icon: UniconsLine.image_slash,
+            iconSize: 64,
+            title: 'Keine Medien vorhanden',
+            subtitle: 'Bilder, Videos und Audiodateien werden hier angezeigt.',
+          ),
+        ),
+
+        // const SizedBox(height: 24),
+        // _buildVideosSection(context),
+        // const SizedBox(height: 24),
+        // _buildImagesSection(context),
+        // const SizedBox(height: 24),
+        // _buildAudioSection(context),
       ],
     );
   }

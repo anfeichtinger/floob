@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AccessibilityData>
  */
-class ReviewFactory extends Factory
+class AccessibilityDataReportFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,9 +16,6 @@ class ReviewFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'score' => fake()->randomFloat(0, 1, 5),
-            'text' => fake()->realText(),
-        ];
+        return [];
     }
 }

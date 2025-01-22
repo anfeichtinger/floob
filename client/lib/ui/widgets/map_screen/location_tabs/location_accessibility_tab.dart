@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/data/enums/accessibility_category.dart';
+import 'package:floob/data/enums/accessibility_entry.dart';
 import 'package:floob/data/models/location.dart';
 import 'package:floob/ui/widgets/list_tile_x.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +17,9 @@ class LocationAccessibilityTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
+    return ListView(
+      padding: EdgeInsets.zero,
+      physics: const BouncingScrollPhysics(),
       children: <Widget>[
         const SizedBox(height: 24),
         const ListTileX(
@@ -42,104 +46,76 @@ class LocationAccessibilityTab extends ConsumerWidget {
           title: Text('Weiß nicht/keine Angabe'),
         ),
         const SizedBox(height: 36),
-        ..._renderExpansionTiles(context, ref)
+        ..._renderExpansionTiles(context, ref),
+        const SizedBox(height: 256),
       ],
     );
   }
 
   List<Widget> _renderExpansionTiles(BuildContext context, WidgetRef ref) {
-    List<Widget> result = List<Widget>.empty();
+    ThemeData theme = Theme.of(context);
+    // Possible icons - remove for random
+    List<Icon> icons = <Icon>[
+      const Icon(UniconsLine.question_circle, color: Colors.grey),
+      const Icon(UniconsLine.check_circle, color: Colors.green),
+      const Icon(UniconsLine.times_circle, color: Colors.red),
+    ];
 
+    // Build results
+    List<Widget> result = List<Widget>.empty(growable: true);
     for (AccessibilityCategory category in AccessibilityCategory.values) {
-      print(category);
-      // Todo Build based on enums
+      int categoryCount = 0;
+      List<AccessibilityEntry> entries = AccessibilityEntry.values
+          .where((AccessibilityEntry entry) =>
+              entry.name.startsWith(category.name))
+          .toList();
+
+      List<Widget> categoryTiles = List<Widget>.empty(growable: true);
+
+      for (AccessibilityEntry entry in entries) {
+        int iconIndex = 0;
+        switch (location.accessibility?[entry.name]?['value']) {
+          case null:
+            iconIndex = 0;
+          case true:
+            iconIndex = 1;
+            categoryCount++;
+          case false:
+            iconIndex = 2;
+        }
+
+        categoryTiles.add(ListTile(
+          leading: icons[iconIndex],
+          title: Text(tr('accessibility_entry_${entry.name}')),
+          subtitle: location.accessibility?[entry.name]?['trusted'] == false
+              ? Text(
+                  'Unzuverlässig!',
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(color: theme.colorScheme.primary),
+                )
+              : null,
+        ));
+      }
+
+      result.add(
+        ExpansionTile(
+          initiallyExpanded: true,
+          collapsedShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Style.radiusMd)),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Style.radiusMd)),
+          backgroundColor: theme.colorScheme.surface,
+          collapsedBackgroundColor: theme.colorScheme.surface,
+          title: Text(
+            '${tr("accessibility_category_${category.name}")} ($categoryCount/${entries.length})',
+            style: theme.textTheme.titleMedium,
+          ),
+          children: categoryTiles,
+        ),
+      );
+      result.add(const SizedBox(height: 36));
     }
 
-    return [
-      ExpansionTile(
-        initiallyExpanded: true,
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        collapsedBackgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(
-          'Wege (7/9)',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        children: const <Widget>[
-          ListTile(title: Text('Todo')),
-        ],
-      ),
-      const SizedBox(height: 36),
-      ExpansionTile(
-        initiallyExpanded: true,
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        collapsedBackgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(
-          'Türen (2/4)',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        children: const <Widget>[
-          ListTile(title: Text('Todo')),
-        ],
-      ),
-      const SizedBox(height: 36),
-      ExpansionTile(
-        initiallyExpanded: true,
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        collapsedBackgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(
-          'Treppen & Aufzüge (6/8)',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        children: const <Widget>[
-          ListTile(title: Text('Todo')),
-        ],
-      ),
-      const SizedBox(height: 36),
-      ExpansionTile(
-        initiallyExpanded: true,
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        collapsedBackgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(
-          'WC (4/5)',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        children: const <Widget>[
-          ListTile(title: Text('Todo')),
-        ],
-      ),
-      const SizedBox(height: 36),
-      ExpansionTile(
-        initiallyExpanded: true,
-        collapsedShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Style.radiusMd)),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        collapsedBackgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(
-          'Mobilität (2/3)',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        children: const <Widget>[
-          ListTile(title: Text('Todo')),
-        ],
-      ),
-    ];
+    return result;
   }
 }
