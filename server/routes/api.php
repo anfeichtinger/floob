@@ -25,6 +25,7 @@ Route::controller(LocationController::class)->prefix('/locations')->group(functi
     Route::get('/paginate', 'paginateLocations');
     Route::get('/latlng', 'getLocationsByLatLng');
     Route::get('/{id}', 'getLocation');
+    Route::put('/{id}/accessibility-entries', 'createAccessibilityEntries');
 });
 #endregion Locations
 

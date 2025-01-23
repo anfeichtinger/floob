@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:floob/data/models/location.dart';
 import 'package:floob/states/controllers/base_controller.dart';
 import 'package:floob/utils/floob_api.dart';
@@ -60,5 +62,24 @@ class LocationController extends BaseController {
 
     // Parse and return the list of locations.
     return FloobApi.parseMany(response, Location.fromJson);
+  }
+
+  Future<Location?> putAccessibilityEntries(
+      Location location, Map<String, String> entries) async {
+    entries.addAll({'overpass_data': jsonEncode(location.overpassData)});
+
+    // Send the request
+    final Response response = await FloobApi.put(
+      '/locations/${location.id ?? 0}/accessibility-entries',
+      body: entries,
+    );
+
+    // Abort if the status code is not 200 or 201
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      throwResponseException(response);
+    }
+
+    // Parse and return the list of locations.
+    return FloobApi.parseOne(response, Location.fromJson);
   }
 }

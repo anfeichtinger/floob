@@ -6,6 +6,7 @@ import 'package:floob/states/bottom_sheet/search_bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/location_list_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
 import 'package:floob/states/controllers/location_controller.dart';
+import 'package:floob/ui/screens/create_location_screen.dart';
 import 'package:floob/ui/screens/profile/profile_screen.dart';
 import 'package:floob/ui/widgets/list_tile_x.dart';
 import 'package:flutter/foundation.dart';
@@ -183,7 +184,7 @@ class SearchBottomSheet extends ConsumerWidget {
                                     ],
                                   ),
                                   Text(
-                                      'geteilte Erfahrungen: ${results[index].reviews?['count']}'),
+                                      'geteilte Erfahrungen: ${results[index].reviews?['count']?.toStringAsFixed(0)}'),
                                 ],
                               ),
                               before: const SizedBox(height: 16),
@@ -224,10 +225,12 @@ class SearchBottomSheet extends ConsumerWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          Style.notImplementedSnackbar,
-                                        );
+                                        Navigator.of(context)
+                                            .push(animatedRoute(
+                                          CreateLocationScreen(
+                                              location: results[index]),
+                                          type: RouteAnimationType.fromBottom,
+                                        ));
                                       },
                                       child: const Text('Neuer Eintrag'),
                                     ),

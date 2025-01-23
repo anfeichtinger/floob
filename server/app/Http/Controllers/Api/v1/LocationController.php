@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Enums\AccessibilityEntry;
+use App\Http\Actions\AccessibilityData\CreateAccessibilityDataAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LocationResource;
 use App\Models\Location;
+use App\Models\User;
 use App\Services\OpenStreetMap\Models\LatLng;
+use App\Services\OpenStreetMap\Models\OverpassData;
 use App\Services\OpenStreetMap\OverpassApi;
 use Exception;
 use Illuminate\Http\Request;
@@ -107,5 +111,35 @@ class LocationController extends Controller
         }
 
         return LocationResource::collection($result);
+    }
+
+    public function createAccessibilityEntries(null|string|int $id = null, Request $request): mixed
+    {
+        $data = $request->toArray();
+        $location = Location::where('id', $id)->orWhere('overpass_id', $data['overpass_data']['id'] ?? null)->orWhere('name', $data['overpass_data']['name'] ?? null)->first();
+
+        if (!$location && array_key_exists('overpass_data', $data)) {
+            $overpassData = OverpassData::from(json_decode($data['overpass_data'] ?? []));
+            $location = Location::fromOverpassData($overpassData, persist: true);
+        }
+
+        if (!$location) {
+            return response()->json(['message' => "Location with id $id not found and no overpass_data provided."], Response::HTTP_NOT_FOUND);
+        }
+
+        foreach ($request->toArray() as $entry => $value) {
+            $entry = AccessibilityEntry::tryFrom($entry);
+            if ($entry && $value !== 'null') {
+                CreateAccessibilityDataAction::handle([
+                    'location_id' => $location->id,
+                    'user_id' => User::first()->id, // Todo: actual current user id
+                    'category' => AccessibilityEntry::getCategory($entry),
+                    'entry' => $entry,
+                    'value' => $value,
+                ]);
+            }
+        }
+
+        return LocationResource::make($location);
     }
 }

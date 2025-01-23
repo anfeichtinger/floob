@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/data/enums/accessibility_category.dart';
@@ -33,14 +31,14 @@ class LocationAccessibilityTab extends ConsumerWidget {
           before: SizedBox(height: 6),
           after: SizedBox(height: 6),
           leading: Icon(
-            UniconsLine.check_circle,
+            UniconsLine.times_circle,
             color: Colors.red,
           ),
           title: Text('Bedinung nicht erfüllt'),
         ),
         const ListTileX(
           leading: Icon(
-            UniconsLine.check_circle,
+            UniconsLine.question_circle,
             color: Colors.grey,
           ),
           title: Text('Weiß nicht/keine Angabe'),
