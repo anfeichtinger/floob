@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:floob/data/models/location.dart';
 import 'package:floob/states/bottom_sheet/location_tab_controller.dart';
 import 'package:floob/ui/widgets/empty_state.dart';

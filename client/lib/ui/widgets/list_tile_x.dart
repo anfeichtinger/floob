@@ -8,6 +8,7 @@ class ListTileX extends StatelessWidget {
   final void Function()? onLongPress; // Optional long press event handler
   final void Function()? onDoubleTap; // Optional double tap event handler
   final Widget? trailing; // Optional trailing widget
+  final EdgeInsetsGeometry trailingPadding; // Optional trailing padding
   final Color? background; // Optional tile background color
   final double? height; // Required height for the custom list tile
   final Widget? before; // Optional widget above list tile
@@ -24,6 +25,7 @@ class ListTileX extends StatelessWidget {
     this.onLongPress,
     this.onDoubleTap,
     this.trailing,
+    this.trailingPadding = const EdgeInsets.all(12),
     this.background,
     this.height,
     this.before,
@@ -73,7 +75,7 @@ class ListTileX extends StatelessWidget {
                   ),
                   Padding(
                     // Padding for the trailing widget
-                    padding: const EdgeInsets.all(12.0),
+                    padding: trailingPadding,
                     child: trailing, // Display trailing widget
                   )
                 ],

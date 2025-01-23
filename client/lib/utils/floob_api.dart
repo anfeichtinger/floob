@@ -110,8 +110,8 @@ class FloobApi {
 
     return Uri(
       scheme: kReleaseMode ? 'https' : 'http',
-      host: kReleaseMode ? 'floob.feichtinger.dev' : 'localhost',
-      port: kReleaseMode ? 443 : 8000,
+      host: kReleaseMode ? 'floob.feichtinger.dev' : 'floob.feichtinger.dev',
+      port: kReleaseMode ? 443 : 80,
       path: isApi ? 'api$path' : path,
       queryParameters: query,
     );

@@ -15,6 +15,13 @@ class Location extends Model
 {
     use HasFactory, IsApiModel;
 
+    /**
+     * The attributes that should be cast.
+     */
+    protected $casts = [
+        'overpass_data' => 'array',
+    ];
+
     #region Relations
 
     public function reviews(): HasMany
