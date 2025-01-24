@@ -8,6 +8,7 @@ import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
+import 'package:hive/hive.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -136,6 +137,7 @@ class ProfileScreen extends ConsumerWidget {
           // Logout Button
           TextButton(
             onPressed: () {
+              Hive.box<dynamic>('prefs').put('id', '');
               Navigator.of(context).pop();
             },
             child: Text(

@@ -6,6 +6,7 @@ import 'package:floob/states/bottom_sheet/search_bottom_sheet_controller.dart';
 import 'package:floob/states/bottom_sheet/location_list_controller.dart';
 import 'package:floob/states/bottom_sheet/search_text_controller.dart';
 import 'package:floob/states/controllers/location_controller.dart';
+import 'package:floob/ui/screens/auth/login_screen.dart';
 import 'package:floob/ui/screens/create_location_screen.dart';
 import 'package:floob/ui/screens/profile/profile_screen.dart';
 import 'package:floob/ui/widgets/list_tile_x.dart';
@@ -17,6 +18,7 @@ import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:unicons/unicons.dart';
 
@@ -103,15 +105,26 @@ class SearchBottomSheet extends ConsumerWidget {
                           customBorder: const CircleBorder(),
                           onTap: () {
                             Navigator.of(context).push(animatedRoute(
-                              const ProfileScreen(),
+                              (Hive.box<dynamic>('prefs').get('id',
+                                          defaultValue: '') as String !=
+                                      ''
+                                  ? const ProfileScreen()
+                                  : const LoginScreen()),
                               type: RouteAnimationType.fromBottom,
                             ));
                           },
-                          child: CircleAvatar(
-                            radius: double.infinity,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                          ),
+                          child: (Hive.box<dynamic>('prefs')
+                                      .get('id', defaultValue: '') as String !=
+                                  ''
+                              ? Image.asset(
+                                  'assets/img/logo-full-512x512.png',
+                                  width: 32,
+                                )
+                              : CircleAvatar(
+                                  radius: double.infinity,
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                )),
                         ),
                       ),
                     ],

@@ -1,14 +1,24 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
+import 'package:floob/states/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RegisterScreen extends ConsumerWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => RegisterScreenState();
+}
+
+class RegisterScreenState extends ConsumerState<RegisterScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final LoginController loginController = LoginController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -49,7 +59,25 @@ class RegisterScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           FilledButton(
-            onPressed: () {},
+            onPressed: () async {
+              final String email = emailController.text;
+              final String password = passwordController.text;
+              bool isOK = await loginController.register(email, password);
+
+              if (mounted) {
+                setState(() {
+                  if (isOK) {
+                    Navigator.of(context).pop();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(tr('register_error')),
+                      ),
+                    );
+                  }
+                });
+              }
+            },
             style: ButtonStyle(
               minimumSize: WidgetStateProperty.all<Size>(
                 const Size(double.infinity, 54),

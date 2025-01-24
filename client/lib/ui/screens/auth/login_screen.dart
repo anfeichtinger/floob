@@ -6,12 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:floob/ui/screens/auth/register_screen.dart';
+import 'package:floob/states/controllers/login_controller.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => LoginScreenState();
+}
+
+class LoginScreenState extends ConsumerState<LoginScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final LoginController loginController = LoginController();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -29,6 +39,7 @@ class LoginScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 64),
           TextFormField(
+            controller: emailController,
             decoration: InputDecoration(
               labelText: tr('login_email'),
               border: const OutlineInputBorder(),
@@ -36,6 +47,7 @@ class LoginScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           TextFormField(
+            controller: passwordController,
             decoration: InputDecoration(
               labelText: tr('login_password'),
               border: const OutlineInputBorder(),
@@ -44,7 +56,27 @@ class LoginScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           FilledButton(
-            onPressed: () {},
+            onPressed: () async {
+              final String email = emailController.text;
+              final String password = passwordController.text;
+              bool isOK = await loginController.login(
+                query: <String, String>{'email': email, 'password': password},
+              );
+
+              if (mounted) {
+                setState(() {
+                  if (isOK) {
+                    Navigator.of(context).pop();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(tr('login_invalid_credentials')),
+                      ),
+                    );
+                  }
+                });
+              }
+            },
             style: ButtonStyle(
               minimumSize: WidgetStateProperty.all<Size>(
                 const Size(double.infinity, 54),

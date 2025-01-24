@@ -14,6 +14,7 @@
   "register_repeat_password": "Repeat Password",
   "register_submit": "Register",
   "register_cancel": "Back to Login",
+  "register_error": "Check your inputs",
   
   "reset_password_submit": "Reset Password",
   
