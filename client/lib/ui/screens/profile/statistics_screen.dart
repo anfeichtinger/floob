@@ -117,6 +117,7 @@ class StatisticsScreen extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(height: 64),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

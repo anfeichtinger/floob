@@ -39,13 +39,17 @@ class ProfileScreen extends ConsumerWidget {
           const SizedBox(height: 8),
 
           // Title Text
-          Center(
-            child: Text(
-              Hive.box<dynamic>('prefs')
-                  .get('session_user_name', defaultValue: 'Anonym') as String,
-              style: const TextStyle(
-                fontSize: 36,
-                fontFamily: 'Nunito',
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Center(
+              child: Text(
+                Hive.box<dynamic>('prefs')
+                    .get('session_user_name', defaultValue: 'Anonym') as String,
+                style: const TextStyle(
+                  fontSize: 36,
+                  fontFamily: 'Nunito',
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -150,6 +154,7 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
           ),
+          const SizedBox(height: 64),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

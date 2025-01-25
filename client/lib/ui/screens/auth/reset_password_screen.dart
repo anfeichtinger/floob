@@ -15,64 +15,68 @@ class ResetPasswordScreen extends ConsumerWidget {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: const AppBarGone(),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          const SizedBox(height: 16),
-          const Header(text: 'Zurücksetzen', hasBackAction: true),
-          Center(
-            child: Image.asset(
-              'assets/img/logo-full-512x512.png',
-              width: MediaQuery.of(context).size.width / 3,
-            ),
-          ),
-          const SizedBox(height: 64),
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: tr('login_password'),
-              border: const OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 32),
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: tr('register_repeat_password'),
-              border: const OutlineInputBorder(),
-            ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 32),
-          FilledButton(
-            onPressed: () => ScaffoldMessenger.of(context)
-                .showSnackBar(Style.notImplementedSnackbar),
-            style: ButtonStyle(
-              minimumSize: WidgetStateProperty.all<Size>(
-                const Size(double.infinity, 54),
+      body: Form(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            const SizedBox(height: 16),
+            const Header(text: 'Zurücksetzen', hasBackAction: true),
+            Center(
+              child: Image.asset(
+                'assets/img/logo-full-512x512.png',
+                width: MediaQuery.of(context).size.width / 3,
               ),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Style.radiusSm.x),
+            ),
+            const SizedBox(height: 64),
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                labelText: tr('login_password'),
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 32),
+            TextFormField(
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: tr('register_repeat_password'),
+                border: const OutlineInputBorder(),
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 32),
+            FilledButton(
+              onPressed: () => ScaffoldMessenger.of(context)
+                  .showSnackBar(Style.notImplementedSnackbar),
+              style: ButtonStyle(
+                minimumSize: WidgetStateProperty.all<Size>(
+                  const Size(double.infinity, 54),
+                ),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                  ),
                 ),
               ),
+              child: Text(tr('reset_password_submit')),
             ),
-            child: Text(tr('reset_password_submit')),
-          ),
-          const SizedBox(height: 32),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Icon(UniconsLine.arrow_left),
-                Text(tr('register_cancel')),
-              ],
+            const SizedBox(height: 32),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Icon(UniconsLine.arrow_left),
+                  Text(tr('register_cancel')),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 64),
-        ],
+            const SizedBox(height: 64),
+          ],
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
     );
