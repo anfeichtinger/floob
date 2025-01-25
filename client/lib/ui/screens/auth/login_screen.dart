@@ -18,122 +18,136 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class LoginScreenState extends ConsumerState<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final LoginController loginController = LoginController();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final LoginController loginController = LoginController();
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: const AppBarGone(),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          const SizedBox(height: 16),
-          const Header(text: 'Login', hasBackAction: true),
+      body: Form(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            const SizedBox(height: 16),
+            const Header(text: 'Login', hasBackAction: true),
 
-          // Logo
-          Center(
-            child: Image.asset(
-              'assets/img/logo-full-512x512.png',
-              width: MediaQuery.of(context).size.width / 3,
+            // Logo
+            Center(
+              child: Image.asset(
+                'assets/img/logo-full-512x512.png',
+                width: MediaQuery.of(context).size.width / 3,
+              ),
             ),
-          ),
-          const SizedBox(height: 64),
+            const SizedBox(height: 64),
 
-          // Email TextFormField
-          TextFormField(
-            controller: emailController,
-            decoration: InputDecoration(
-              labelText: tr('login_email'),
-              border: const OutlineInputBorder(),
+            // Email TextFormField
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: tr('login_email'),
+                border: const OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 32),
+            const SizedBox(height: 32),
 
-          // Password TextFormField
-          TextFormField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              labelText: tr('login_password'),
-              border: const OutlineInputBorder(),
+            // Password TextFormField
+            TextFormField(
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.visiblePassword,
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: tr('login_password'),
+                border: const OutlineInputBorder(),
+              ),
+              obscureText: true,
             ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 32),
+            const SizedBox(height: 32),
 
-          // Submit Button
-          FilledButton(
-            onPressed: () async {
-              final String email = emailController.text;
-              final String password = passwordController.text;
-              bool isOK = await loginController.login(
-                query: <String, String>{'email': email, 'password': password},
-              );
+            // Submit Button
+            FilledButton(
+              onPressed: () async {
+                final String email = emailController.text;
+                final String password = passwordController.text;
+                bool isOK = await loginController.login(
+                  query: <String, String>{'email': email, 'password': password},
+                );
 
-              if (mounted) {
-                setState(() {
-                  if (isOK) {
-                    ref.read(loginStateNotifierProvider.notifier).login();
-                    Navigator.of(context).pop();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          tr('login_invalid_credentials'),
+                if (mounted) {
+                  setState(() {
+                    if (isOK) {
+                      ref.read(loginStateNotifierProvider.notifier).login();
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text(
+                            tr('login_success'),
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                });
-              }
-            },
-            style: ButtonStyle(
-              minimumSize: WidgetStateProperty.all<Size>(
-                const Size(double.infinity, 54),
-              ),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            tr('login_invalid_credentials'),
+                          ),
+                        ),
+                      );
+                    }
+                  });
+                }
+              },
+              style: ButtonStyle(
+                minimumSize: WidgetStateProperty.all<Size>(
+                  const Size(double.infinity, 54),
+                ),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                  ),
                 ),
               ),
+              child: Text(tr('login_submit')),
             ),
-            child: Text(tr('login_submit')),
-          ),
-          const SizedBox(height: 32),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                animatedRoute(
-                  const RegisterScreen(),
-                  type: RouteAnimationType.fromRight,
-                ),
-              );
-            },
-            child: Text(
-              tr('login_register'),
+            const SizedBox(height: 32),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  animatedRoute(
+                    const RegisterScreen(),
+                    type: RouteAnimationType.fromRight,
+                  ),
+                );
+              },
+              child: Text(
+                tr('login_register'),
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                animatedRoute(
-                  const ResetPasswordScreen(),
-                  type: RouteAnimationType.fromRight,
-                ),
-              );
-            },
-            child: Text(
-              tr('login_forgot_password'),
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  animatedRoute(
+                    const ResetPasswordScreen(),
+                    type: RouteAnimationType.fromRight,
+                  ),
+                );
+              },
+              child: Text(
+                tr('login_forgot_password'),
+              ),
             ),
-          ),
-          const SizedBox(height: 64),
-        ],
+            const SizedBox(height: 64),
+          ],
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
     );

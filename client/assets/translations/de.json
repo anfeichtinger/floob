@@ -10,11 +10,13 @@
   "login_register": "Registrieren",
   "login_forgot_password": "Passwort vergessen",
   "login_invalid_credentials": "Ungültige Anmeldeinformationen",
+  "login_success": "Login erfolgreich",
   
   "register_repeat_password": "Passwort wiederholen",
   "register_submit": "Registrieren",
   "register_cancel": "Zurück zur Anmeldung",
   "register_error": "Überprüfe deine Eingaben",
+  "register_success": "Registrierung erfolgreich",
 
   "reset_password_submit": "Passwort zurücksetzen",
 

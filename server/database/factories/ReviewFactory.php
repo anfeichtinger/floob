@@ -19,6 +19,7 @@ class ReviewFactory extends Factory
         return [
             'score' => fake()->randomFloat(0, 1, 5),
             'text' => fake()->realText(),
+            'created_at' => fake()->dateTimeBetween('2024-12-01', '2025-01-29'),
         ];
     }
 }

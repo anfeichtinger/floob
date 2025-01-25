@@ -27,108 +27,124 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: const AppBarGone(),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          const SizedBox(height: 16),
-          const Header(text: 'Registrierung', hasBackAction: true),
+      body: Form(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            const SizedBox(height: 16),
+            const Header(text: 'Registrierung', hasBackAction: true),
 
-          // Logo
-          Center(
-            child: Image.asset(
-              'assets/img/logo-full-512x512.png',
-              width: MediaQuery.of(context).size.width / 3,
-            ),
-          ),
-          const SizedBox(height: 64),
-
-          // Email TextFormField
-          TextFormField(
-            controller: emailController,
-            decoration: InputDecoration(
-              labelText: tr('login_email'),
-              border: const OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 32),
-
-          // Password TextFormField
-          TextFormField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              labelText: tr('login_password'),
-              border: const OutlineInputBorder(),
-            ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 32),
-
-          // Repeat password TextFormField
-          TextFormField(
-            controller: repeatPasswordController,
-            decoration: InputDecoration(
-              labelText: tr('register_repeat_password'),
-              border: const OutlineInputBorder(),
-            ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 32),
-
-          // Register button
-          FilledButton(
-            onPressed: () async {
-              final String email = emailController.text;
-              final String password = passwordController.text;
-              final String repeatPassword = repeatPasswordController.text;
-              bool isOK = password == repeatPassword
-                  ? await loginController.register(email, password)
-                  : false;
-
-              if (mounted) {
-                setState(() {
-                  if (isOK) {
-                    Navigator.of(context).pop();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          tr('register_error'),
-                        ),
-                      ),
-                    );
-                  }
-                });
-              }
-            },
-            style: ButtonStyle(
-              minimumSize: WidgetStateProperty.all<Size>(
-                const Size(double.infinity, 54),
+            // Logo
+            Center(
+              child: Image.asset(
+                'assets/img/logo-full-512x512.png',
+                width: MediaQuery.of(context).size.width / 3,
               ),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Style.radiusSm.x),
+            ),
+            const SizedBox(height: 64),
+
+            // Email TextFormField
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.emailAddress,
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: tr('login_email'),
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            // Password TextFormField
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.visiblePassword,
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: tr('login_password'),
+                border: const OutlineInputBorder(),
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 32),
+
+            // Repeat password TextFormField
+            TextFormField(
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.visiblePassword,
+              controller: repeatPasswordController,
+              decoration: InputDecoration(
+                labelText: tr('register_repeat_password'),
+                border: const OutlineInputBorder(),
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 32),
+
+            // Register button
+            FilledButton(
+              onPressed: () async {
+                final String email = emailController.text;
+                final String password = passwordController.text;
+                final String repeatPassword = repeatPasswordController.text;
+                bool isOK = password == repeatPassword
+                    ? await loginController.register(email, password)
+                    : false;
+
+                if (mounted) {
+                  setState(() {
+                    if (isOK) {
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text(
+                            tr('register_success'),
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            tr('register_error'),
+                          ),
+                        ),
+                      );
+                    }
+                  });
+                }
+              },
+              style: ButtonStyle(
+                minimumSize: WidgetStateProperty.all<Size>(
+                  const Size(double.infinity, 54),
+                ),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                  ),
                 ),
               ),
+              child: Text(tr('register_submit')),
             ),
-            child: Text(tr('register_submit')),
-          ),
-          const SizedBox(height: 32),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Icon(UniconsLine.arrow_left),
-                Text(tr('register_cancel')),
-              ],
+            const SizedBox(height: 32),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Icon(UniconsLine.arrow_left),
+                  Text(tr('register_cancel')),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 64),
-        ],
+            const SizedBox(height: 64),
+          ],
+        ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
     );
