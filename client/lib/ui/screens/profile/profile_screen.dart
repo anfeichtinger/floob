@@ -27,7 +27,7 @@ class ProfileScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          const Header(text: 'profile_title'),
+          const Header(text: 'profile_title', hasBackAction: true),
 
           // Logo Image
           Center(
@@ -41,8 +41,8 @@ class ProfileScreen extends ConsumerWidget {
           // Title Text
           Center(
             child: Text(
-              Hive.box<dynamic>('prefs').get('session_user_name',
-                  defaultValue: 'Florian Oberleitner') as String,
+              Hive.box<dynamic>('prefs')
+                  .get('session_user_name', defaultValue: 'Anonym') as String,
               style: const TextStyle(
                 fontSize: 36,
                 fontFamily: 'Nunito',

@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/states/controllers/login_controller.dart';
+import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unicons/unicons.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -30,6 +32,7 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 16),
+          const Header(text: 'Registrierung', hasBackAction: true),
 
           // Logo
           Center(
@@ -89,7 +92,10 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(tr('register_error')),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                          tr('register_error'),
+                        ),
                       ),
                     );
                   }
@@ -113,10 +119,15 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(
-              '< ${tr('register_cancel')}',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Icon(UniconsLine.arrow_left),
+                Text(tr('register_cancel')),
+              ],
             ),
           ),
+          const SizedBox(height: 64),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

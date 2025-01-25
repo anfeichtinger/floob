@@ -13,7 +13,7 @@ class LocationRatingListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         ListTile(
           // Avatar
           leading: Image.asset(

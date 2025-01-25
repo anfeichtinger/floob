@@ -1,7 +1,7 @@
 import 'package:floob/utils/floob_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpod/src/framework.dart';
 import 'base_controller.dart';
 import 'package:floob/data/models/user.dart';
 import 'package:floob/states/controllers/login_state_notifier.dart';
@@ -16,7 +16,7 @@ class LoginController extends BaseController {
       Hive.box<dynamic>('prefs').put('session_user_id', user!.id.toString());
       Hive.box<dynamic>('prefs').put('session_user_name', user.name);
       Hive.box<dynamic>('prefs').put('session_user_email', user.email);
-      loginStateNotifierProvider.notifier.update((state) => true);
+      loginStateNotifierProvider.notifier.update((dynamic state) => true);
       return true;
     } else {
       return false;
@@ -27,7 +27,7 @@ class LoginController extends BaseController {
     Hive.box<dynamic>('prefs').put('session_user_id', '');
     Hive.box<dynamic>('prefs').put('session_user_name', '');
     Hive.box<dynamic>('prefs').put('session_user_email', '');
-    loginStateNotifierProvider.notifier.update((state) => false);
+    loginStateNotifierProvider.notifier.update((dynamic state) => false);
   }
 
   Future<bool> register(String email, String password) async {
@@ -51,6 +51,6 @@ class LoginController extends BaseController {
   }
 }
 
-extension on AlwaysAliveRefreshable<LoginStateNotifier> {
+extension on Refreshable<LoginStateNotifier> {
   void update(bool Function(dynamic state) param0) {}
 }

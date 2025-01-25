@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
 import 'package:floob/ui/screens/auth/reset_password_screen.dart';
+import 'package:floob/ui/widgets/header.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
@@ -32,6 +33,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 16),
+          const Header(text: 'Login', hasBackAction: true),
 
           // Logo
           Center(
@@ -80,7 +82,10 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(tr('login_invalid_credentials')),
+                        backgroundColor: Colors.red,
+                        content: Text(
+                          tr('login_invalid_credentials'),
+                        ),
                       ),
                     );
                   }
@@ -127,6 +132,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
               tr('login_forgot_password'),
             ),
           ),
+          const SizedBox(height: 64),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

@@ -13,7 +13,7 @@ import 'package:floob/ui/widgets/header.dart';
 import 'package:floob/ui/widgets/list_tile_x.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
-import 'package:flutter_map/src/map/controller/map_controller.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:unicons/unicons.dart';
@@ -158,7 +158,9 @@ class CreateLocationScreenState extends ConsumerState<CreateLocationScreen> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content: Text('Ein Fehler ist aufgetreten')),
+                            backgroundColor: Colors.red,
+                            content: Text('Ein Fehler ist aufgetreten'),
+                          ),
                         );
                       }
                     });

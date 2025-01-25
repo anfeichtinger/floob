@@ -3,11 +3,13 @@ import 'package:floob/config/style.dart';
 import 'package:floob/data/models/location.dart';
 import 'package:floob/data/models/review.dart';
 import 'package:floob/states/controllers/review_controller.dart';
+import 'package:floob/ui/widgets/empty_state.dart';
 import 'package:floob/ui/widgets/map_screen/rating_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:floob/ui/widgets/map_screen/location_rating_list_tile.dart';
+import 'package:unicons/unicons.dart';
 
 class LocationRatingsTab extends ConsumerStatefulWidget {
   const LocationRatingsTab({required this.location, super.key});
@@ -84,7 +86,7 @@ class LocationRatingsTabState extends ConsumerState<LocationRatingsTab> {
                 width: 64,
               ),
             ),
-            const SizedBox(width: 36),
+            const SizedBox(width: 16),
 
             // Star Rating
             RatingBar.builder(
@@ -130,7 +132,15 @@ class LocationRatingsTabState extends ConsumerState<LocationRatingsTab> {
               if (f.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (f.hasError || !f.hasData || f.data!.isEmpty) {
-                return Center(child: Text(tr('location_ratings_no_ratings')));
+                return const Padding(
+                  padding: EdgeInsets.only(top: 24),
+                  child: Center(
+                    child: EmptyState(
+                      icon: UniconsLine.comment_alt_lines,
+                      title: 'location_ratings_no_ratings',
+                    ),
+                  ),
+                );
               } else {
                 List<Review> reviews = f.data!;
                 return ListView.builder(
