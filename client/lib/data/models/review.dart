@@ -34,4 +34,18 @@ class Review extends BaseModel {
   /// Connect the generated [_$ReviewToJson] function to the `toJson` method.
   @override
   Map<String, dynamic> toJson() => _$ReviewToJson(this);
+
+  @override
+  String toString() {
+    return '''Review {
+      id: $id,
+      locationId: $locationId,
+      location: $location,
+      userId: $userId,
+      user: $user,
+      score: $score,
+      text: $text,
+      createdAt: $createdAt,
+    }''';
+  }
 }

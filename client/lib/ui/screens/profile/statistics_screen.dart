@@ -24,28 +24,28 @@ class StatisticsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 20),
           TextField(
-            decoration: InputDecoration(
-              labelText: tr('profile_rated_buildings'),
-              labelStyle: const TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                labelText: tr('profile_rated_buildings'),
+                labelStyle: const TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(Style.radiusSm.x),
+                ),
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Style.radiusSm.x),
-              ),
-            ),
-            controller: TextEditingController(text: '6'),
-            readOnly: true,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'Nunito',
-              color: Colors.green,
-            ),
-          ),
-          const SizedBox(height: 14),
+              controller: TextEditingController(text: '6'),
+              readOnly: true,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.titleLarge),
+          const SizedBox(height: 24),
           TextField(
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               labelText: tr('profile_rated_categories'),
               labelStyle: const TextStyle(
                 fontFamily: 'Nunito',
@@ -58,15 +58,14 @@ class StatisticsScreen extends ConsumerWidget {
             ),
             controller: TextEditingController(text: '11'),
             readOnly: true,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'Nunito',
-              color: Colors.green,
-            ),
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 24),
           TextField(
             decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               labelText: tr('profile_most_frequent_category'),
               labelStyle: const TextStyle(
                 fontFamily: 'Nunito',
@@ -79,19 +78,16 @@ class StatisticsScreen extends ConsumerWidget {
             ),
             controller: TextEditingController(text: 'Treppen & Aufzüge'),
             readOnly: true,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'Nunito',
-              color: Colors.green,
-            ),
+            textAlign: TextAlign.start,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 48),
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(Style.radiusSm.x),
             ),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height * 0.4,
             ),
@@ -105,20 +101,16 @@ class StatisticsScreen extends ConsumerWidget {
                       .headlineSmall
                       ?.copyWith(fontFamily: 'Nunito'),
                 ),
-                const SizedBox(height: 32),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: List<Widget>.generate(
-                      4,
-                      (int index) => Container(
-                        width: 40,
-                        height: 40,
-                        margin: const EdgeInsets.only(right: 10),
-                        color: Colors.grey,
-                      ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List<Widget>.generate(
+                    4,
+                    (int index) => Container(
+                      width: 40,
+                      height: 40,
+                      margin: const EdgeInsets.only(right: 10),
+                      color: Colors.grey,
                     ),
                   ),
                 ),

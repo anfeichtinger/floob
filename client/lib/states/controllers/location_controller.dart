@@ -66,7 +66,8 @@ class LocationController extends BaseController {
 
   Future<Location?> putAccessibilityEntries(
       Location location, Map<String, String> entries) async {
-    entries.addAll({'overpass_data': jsonEncode(location.overpassData)});
+    entries.addAll(
+        <String, String>{'overpass_data': jsonEncode(location.overpassData)});
 
     // Send the request
     final Response response = await FloobApi.put(

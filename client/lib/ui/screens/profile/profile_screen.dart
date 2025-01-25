@@ -1,3 +1,4 @@
+import 'package:floob/states/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/screens/menu/settings_screen.dart';
 import 'package:floob/ui/screens/profile/personal_data_screen.dart';
@@ -8,12 +9,16 @@ import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
+import 'package:hive/hive.dart';
+import 'package:floob/states/controllers/login_state_notifier.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final LoginController loginController = LoginController();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -22,7 +27,7 @@ class ProfileScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
-          const Header(text: 'profile_title'),
+          const Header(text: 'profile_title', hasBackAction: true),
 
           // Logo Image
           Center(
@@ -31,22 +36,22 @@ class ProfileScreen extends ConsumerWidget {
               width: MediaQuery.of(context).size.width / 4,
             ),
           ),
-
           const SizedBox(height: 8),
 
           // Title Text
-          const Center(
+          Center(
             child: Text(
-              'Florian Oberleitner',
-              style: TextStyle(
+              Hive.box<dynamic>('prefs')
+                  .get('session_user_name', defaultValue: 'Anonym') as String,
+              style: const TextStyle(
                 fontSize: 36,
                 fontFamily: 'Nunito',
               ),
             ),
           ),
-
           const SizedBox(height: 64),
 
+          // Personal Data Button
           ListTile(
             title: Text(
               tr('profile_personal_data'),
@@ -72,7 +77,6 @@ class ProfileScreen extends ConsumerWidget {
               );
             },
           ),
-
           const SizedBox(height: 8),
 
           // Statistics Button
@@ -101,7 +105,6 @@ class ProfileScreen extends ConsumerWidget {
               );
             },
           ),
-
           const SizedBox(height: 8),
 
           // Settings Button
@@ -130,12 +133,13 @@ class ProfileScreen extends ConsumerWidget {
               );
             },
           ),
-
           const SizedBox(height: 8),
 
           // Logout Button
           TextButton(
             onPressed: () {
+              loginController.logout();
+              ref.read(loginStateNotifierProvider.notifier).logout();
               Navigator.of(context).pop();
             },
             child: Text(
