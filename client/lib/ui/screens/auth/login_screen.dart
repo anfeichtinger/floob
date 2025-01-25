@@ -7,6 +7,7 @@ import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:floob/ui/screens/auth/register_screen.dart';
 import 'package:floob/states/controllers/login_controller.dart';
+import 'package:floob/states/controllers/login_state_notifier.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -31,6 +32,8 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 16),
+
+          // Logo
           Center(
             child: Image.asset(
               'assets/img/logo-full-512x512.png',
@@ -38,6 +41,8 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ),
           const SizedBox(height: 64),
+
+          // Email TextFormField
           TextFormField(
             controller: emailController,
             decoration: InputDecoration(
@@ -46,6 +51,8 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ),
           const SizedBox(height: 32),
+
+          // Password TextFormField
           TextFormField(
             controller: passwordController,
             decoration: InputDecoration(
@@ -55,6 +62,8 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
             obscureText: true,
           ),
           const SizedBox(height: 32),
+
+          // Submit Button
           FilledButton(
             onPressed: () async {
               final String email = emailController.text;
@@ -66,6 +75,7 @@ class LoginScreenState extends ConsumerState<LoginScreen> {
               if (mounted) {
                 setState(() {
                   if (isOK) {
+                    ref.read(loginStateNotifierProvider.notifier).login();
                     Navigator.of(context).pop();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

@@ -15,6 +15,8 @@ class RegisterScreen extends ConsumerStatefulWidget {
 class RegisterScreenState extends ConsumerState<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repeatPasswordController =
+      TextEditingController();
   final LoginController loginController = LoginController();
 
   @override
@@ -28,6 +30,8 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 16),
+
+          // Logo
           Center(
             child: Image.asset(
               'assets/img/logo-full-512x512.png',
@@ -35,14 +39,20 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
           ),
           const SizedBox(height: 64),
+
+          // Email TextFormField
           TextFormField(
+            controller: emailController,
             decoration: InputDecoration(
               labelText: tr('login_email'),
               border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 32),
+
+          // Password TextFormField
           TextFormField(
+            controller: passwordController,
             decoration: InputDecoration(
               labelText: tr('login_password'),
               border: const OutlineInputBorder(),
@@ -50,7 +60,10 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
             obscureText: true,
           ),
           const SizedBox(height: 32),
+
+          // Repeat password TextFormField
           TextFormField(
+            controller: repeatPasswordController,
             decoration: InputDecoration(
               labelText: tr('register_repeat_password'),
               border: const OutlineInputBorder(),
@@ -58,11 +71,16 @@ class RegisterScreenState extends ConsumerState<RegisterScreen> {
             obscureText: true,
           ),
           const SizedBox(height: 32),
+
+          // Register button
           FilledButton(
             onPressed: () async {
               final String email = emailController.text;
               final String password = passwordController.text;
-              bool isOK = await loginController.register(email, password);
+              final String repeatPassword = repeatPasswordController.text;
+              bool isOK = password == repeatPassword
+                  ? await loginController.register(email, password)
+                  : false;
 
               if (mounted) {
                 setState(() {

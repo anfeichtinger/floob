@@ -18,9 +18,9 @@ import 'package:floob/ui/widgets/bottom_sheet_handle.dart';
 import 'package:floob/utils/route_builder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:unicons/unicons.dart';
+import 'package:floob/states/controllers/login_state_notifier.dart';
 
 class SearchBottomSheet extends ConsumerWidget {
   const SearchBottomSheet({super.key});
@@ -41,6 +41,9 @@ class SearchBottomSheet extends ConsumerWidget {
 
     // The results to show
     final List<Location> results = ref.watch(locationListProvider).results;
+
+    // Listen to login state changes
+    final bool isLoggedIn = ref.watch(loginStateNotifierProvider);
 
     return DraggableScrollableSheet(
       controller: searchSheetController,
@@ -78,6 +81,8 @@ class SearchBottomSheet extends ConsumerWidget {
                 child: Column(children: <Widget>[
                   const BottomSheetHandle(),
                   const SizedBox(height: 16),
+
+                  // Search Field
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,6 +103,8 @@ class SearchBottomSheet extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: 16),
+
+                      // Profile Image
                       SizedBox(
                         height: 64,
                         width: 64,
@@ -105,17 +112,13 @@ class SearchBottomSheet extends ConsumerWidget {
                           customBorder: const CircleBorder(),
                           onTap: () {
                             Navigator.of(context).push(animatedRoute(
-                              (Hive.box<dynamic>('prefs').get('id',
-                                          defaultValue: '') as String !=
-                                      ''
+                              isLoggedIn
                                   ? const ProfileScreen()
-                                  : const LoginScreen()),
+                                  : const LoginScreen(),
                               type: RouteAnimationType.fromBottom,
                             ));
                           },
-                          child: (Hive.box<dynamic>('prefs')
-                                      .get('id', defaultValue: '') as String !=
-                                  ''
+                          child: isLoggedIn
                               ? Image.asset(
                                   'assets/img/logo-full-512x512.png',
                                   width: 32,
@@ -124,12 +127,14 @@ class SearchBottomSheet extends ConsumerWidget {
                                   radius: double.infinity,
                                   backgroundColor:
                                       Theme.of(context).colorScheme.primary,
-                                )),
+                                ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
+
+                  // Results
                   ConstrainedBox(
                     constraints: BoxConstraints(
                       minHeight: MediaQuery.of(context).size.height - 128,
