@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:floob/data/models/location.dart';
 import 'package:floob/data/models/review.dart';
 import 'package:floob/states/controllers/base_controller.dart';
@@ -32,9 +30,7 @@ class ReviewController extends BaseController {
 
   Future<List<Review>> getReviewsByLocation(Location location) async {
     Map<String, dynamic> query = <String, dynamic>{
-      'filters': jsonEncode(<String, String>{
-        'location_id': location.id.toString(),
-      })
+      'filters[location_id]': '${location.id}'
     };
 
     return getReviews(query: query);

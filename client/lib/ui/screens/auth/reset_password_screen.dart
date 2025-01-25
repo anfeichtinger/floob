@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
+import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:floob/ui/widgets/app_bar_gone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unicons/unicons.dart';
 
 class ResetPasswordScreen extends ConsumerWidget {
   const ResetPasswordScreen({super.key});
@@ -18,6 +20,7 @@ class ResetPasswordScreen extends ConsumerWidget {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 16),
+          const Header(text: 'Zurücksetzen', hasBackAction: true),
           Center(
             child: Image.asset(
               'assets/img/logo-full-512x512.png',
@@ -41,7 +44,8 @@ class ResetPasswordScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           FilledButton(
-            onPressed: () {},
+            onPressed: () => ScaffoldMessenger.of(context)
+                .showSnackBar(Style.notImplementedSnackbar),
             style: ButtonStyle(
               minimumSize: WidgetStateProperty.all<Size>(
                 const Size(double.infinity, 54),
@@ -59,10 +63,15 @@ class ResetPasswordScreen extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(
-              '< ${tr('register_cancel')}',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Icon(UniconsLine.arrow_left),
+                Text(tr('register_cancel')),
+              ],
             ),
           ),
+          const SizedBox(height: 64),
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,

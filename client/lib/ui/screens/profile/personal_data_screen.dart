@@ -4,6 +4,7 @@ import 'package:floob/ui/widgets/header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:floob/config/style.dart';
+import 'package:hive/hive.dart';
 
 class PersonalDataScreen extends ConsumerStatefulWidget {
   const PersonalDataScreen({super.key});
@@ -59,6 +60,9 @@ class PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
                 ),
                 const SizedBox(height: 64),
                 TextField(
+                  controller: TextEditingController(
+                      text: Hive.box<dynamic>('prefs').get('session_user_email',
+                          defaultValue: '') as String),
                   decoration: InputDecoration(
                     labelText: tr('profile_email'),
                     labelStyle: textStyle,
@@ -104,6 +108,8 @@ class PersonalDataScreenState extends ConsumerState<PersonalDataScreen> {
             child: FilledButton(
               onPressed: () {
                 // TODO: Save action
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(Style.notImplementedSnackbar);
               },
               style: ButtonStyle(
                 minimumSize: WidgetStateProperty.all<Size>(
